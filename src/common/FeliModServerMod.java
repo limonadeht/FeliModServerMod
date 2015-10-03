@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
+import recipe.Craftingrecipe;
 import server.ServerProxy;
 
 /**
@@ -48,6 +49,7 @@ public class FeliModServerMod
     {
 		FeliModServerModItems.registerFeliModServerItems();
 		FeliModServerModBlocks.registerFeliModServerModBlocks();
+		Craftingrecipe.registerFeliModServerModRecipes();
 
 		serverproxy.registerRenderThings();
 		serverproxy.registerTileEntitySpecialRenderer();
