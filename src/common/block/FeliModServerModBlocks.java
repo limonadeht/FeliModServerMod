@@ -19,7 +19,7 @@ public class FeliModServerModBlocks
 		BlockFoodCraftTable = new BlockFoodCraftTable().setBlockName("Food CraftTable");
 		GameRegistry.registerBlock(BlockFoodCraftTable, "Food CraftTable");
 
-		BlockRiceCooker = new BlockRiceCooker().setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerBlock(BlockRiceCooker, "Rice Cooker");
+		/*BlockRiceCooker = new BlockRiceCooker().setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerBlock(BlockRiceCooker, "Rice Cooker");*/
 	}
 }
