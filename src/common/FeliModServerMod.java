@@ -10,6 +10,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.creativetab.CreativeTabs;
 import server.ServerProxy;
 
+/**
+ *
+ * @author Lemon, isuzu
+ *
+ */
+
 @Mod(modid = FeliModServerMod.MOD_ID, version = FeliModServerMod.VERSION)
 public class FeliModServerMod
 {
@@ -21,7 +27,7 @@ public class FeliModServerMod
 	public static int blockRenderId;
 	public static final int BlockFoodCraftTable = 1;
 
-	@SidedProxy(clientSide = "felimodserver.ClientProxy", serverSide = "felimodserver.ServerProxy")
+	@SidedProxy(clientSide = "client.ClientProxy", serverSide = "server.ServerProxy")
 	public static ServerProxy serverproxy;
 
 
