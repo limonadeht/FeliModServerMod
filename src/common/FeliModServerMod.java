@@ -1,5 +1,6 @@
 package common;
 
+import client.model.tileentity.TileEntityRiceCooker;
 import common.block.FeliModServerModBlocks;
 import common.food.FeliModServerModItems;
 import cpw.mods.fml.common.Mod;
@@ -8,7 +9,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import handler.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import recipe.Craftingrecipe;
+import recipe.RiceCookerRecipes;
 import server.ServerProxy;
 
 /**
@@ -32,6 +37,7 @@ public class FeliModServerMod
 	public static ServerProxy serverproxy;
 
 
+
 	public static final CreativeTabs tabFeliModServerMod = new tabFeliModServerMod("FeliModServerMod");
 
 	//Rice CookerのGuiId
@@ -48,12 +54,15 @@ public class FeliModServerMod
     {
 		FeliModServerModItems.registerFeliModServerItems();
 		FeliModServerModBlocks.registerFeliModServerModBlocks();
-		Craftingrecipe.registerFeliModServerModRecipes();
+		Craftingrecipe.registerFeliModServerModCraftingRecipes();
+		RiceCookerRecipes.registerFeliModServerModRiceCookerRecipes();
 
 		serverproxy.registerRenderThings();
 		serverproxy.registerTileEntitySpecialRenderer();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
+		GameRegistry.registerTileEntity(TileEntityRiceCooker.class, "BlockRiceCooker");
 
 		//NetworkRegistry.INSTANCE().registerGuiHandler(Instance, GuiHandler);
 

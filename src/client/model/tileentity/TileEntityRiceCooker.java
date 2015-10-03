@@ -1,13 +1,10 @@
 package client.model.tileentity;
 
-import common.RiceCookerRecipes;
 import common.block.BlockRiceCooker;
 import common.food.FeliModServerModItems;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,14 +12,224 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 {
+
+	private String localizedName;
+
+	private static final int[] slots_top = new int[]{0};
+	private static final int[] slots_bottom = new int[]{2,1};
+	private static final int[] slots_side = new int[]{1};
+
+	private ItemStack[] slots = new ItemStack[3];
+
+	public int ricecookerSpeed = 150;
 	public int burnTime;
+	public int currentItemBurnTime;
+	public int cookTime;
+
+	public void setGuiDisplayName(String displayName){
+		this.localizedName=displayName;
+	}
+
+	public String getInventoryName(){
+		return this.hasCustomInventoryName() ? this.localizedName : "container.RiceCooker";
+	}
+
+	public boolean hasCustomInventoryName(){
+		return this.localizedName != null && this.localizedName.length() > 0;
+	}
+
+	public int getSizeInventory(){
+		return this.slots.length;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int ver1) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int ver1, int ver2) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int ver1) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public void setInventorySlotContents(int ver1, ItemStack itemstack) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 64;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+	public void openInventory() {}
+	public void closeInventory() {}
+
+	@Override
+	public boolean isItemValidForSlot(int ver1, ItemStack itemstack) {
+		return ver1 == 2 ? false : (ver1 == 1 ? isItemFuel(itemstack) : true );
+	}
+
+	public static boolean isItemFuel (ItemStack itemstack){
+		return getItemBurnTime(itemstack) > 0;
+	}
+
+	private static int getItemBurnTime(ItemStack itemstack) {
+		if(itemstack == null){
+			return 0;
+		}else{
+			Item item = itemstack.getItem();
+
+			if(item instanceof ItemBlock && Block.getBlockFromItem(item)!= Blocks.air){
+				Block block = Block.getBlockFromItem(item);
+
+				//ここに燃料登録。
+				//if(アイテムかブロックか　== それは何か)return どれだけ燃焼するか;
+				if(item == Items.coal)return 1600;
+				if(item == Items.stick)return 100;
+				if(block == Blocks.sapling)return 100;
+				if(item == Items.blaze_rod)return 2400;
+				if(block == Blocks.coal_block)return 14400;
+
+				return GameRegistry.getFuelValue(itemstack);
+			}
+		}
+		return 0;
+	}
+
+	public boolean isBurning(){
+		return this.burnTime > 0;
+	}
+
+	public void updateEntity(){
+		boolean flag = this.burnTime > 0;
+		boolean flag1 = false;
+
+		if(this.isBurning()){
+			this.burnTime--;
+		}
+		if(!this.worldObj.isRemote){
+			if(this.burnTime == 0 && this.canSmelt()){
+				this.currentItemBurnTime = this.burnTime = getItemBurnTime(this.slots[1]);
+
+				if(this.isBurning()){
+					flag1=true;
+
+					if(this.slots[1]!= null){
+						this.slots[1].stackSize--;
+
+						if(this.slots[1].stackSize == 0){
+							this.slots[1] = this.slots[1].getItem().getContainerItem(this.slots[1]);
+						}
+					}
+
+				}
+			}
+
+			if(this.isBurning()&&this.canSmelt()){
+				this.cookTime++;
+
+				if(this.cookTime == this.ricecookerSpeed){
+					this.cookTime = 0;
+					this.smeltItem();
+					flag1 = true;
+				}
+			}else{
+				this.cookTime = 0;
+			}
+
+			if(flag != this.isBurning()){
+				flag1 = true;
+				BlockRiceCooker.updateRiceCookerState(this.burnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+			}
+		}
+		if (flag1) {
+			this.markDirty();
+		}
+	}
+
+	public boolean canSmelt(){
+		if(this.slots[0] == null){
+			return false;
+		}else{
+			ItemStack itemstack = recipe.RiceCookerRecipes.smelting().getSmeltingResult(this.slots[0]);
+
+			if(itemstack == null)return false;
+			if(this.slots[2] == null)return true;
+			if(!this.slots[2].isItemEqual(itemstack))return false;
+
+			int result = this.slots[2].stackSize + itemstack.stackSize;
+
+			return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+
+		}
+
+	}
+
+	public void smeltItem(){
+		if(this.canSmelt()){
+			ItemStack itemstack = recipe.RiceCookerRecipes.smelting().getSmeltingResult(this.slots[0]);
+
+			if(this.slots[2] == null){
+				this.slots[2] = itemstack.copy();
+			}else if(this.slots[2].isItemEqual(itemstack)){
+				this.slots[2].stackSize += itemstack.stackSize;
+			}
+
+			this.slots[0].stackSize--;
+
+			if(this.slots[0].stackSize <= 0){
+				this.slots[0] = null;
+			}
+
+		}
+	}
+
+
+	//アクセス可能なスロット
+	@Override
+	public int[] getAccessibleSlotsFromSide(int ver1) {
+		return ver1 == 0 ? slots_bottom : (ver1 == 1 ? slots_top : slots_side);
+	}
+
+	@Override
+	public boolean canInsertItem(int ver1, ItemStack itemstack, int ver3) {
+		return this.isItemValidForSlot(ver1, itemstack);
+	}
+
+	//戻ってくるアイテム指定。容器とか。
+	@Override
+	public boolean canExtractItem(int ver1, ItemStack itemstack, int ver3) {
+		return ver3!=0||ver1!=1||itemstack.getItem()==Items.bucket;
+	}
+
+
+
+
+
+
+
+	/*public int burnTime;
 	public int currentItemBurnTime;
 	public int cookTime;
 
@@ -302,6 +509,6 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 	@Override
 	public boolean canExtractItem(int par1, ItemStack itemstack, int par3) {
 		return par3 != 0 || par1 != 1 || itemstack.getItem() == Items.bucket;
-	}
+	}*/
 
 }

@@ -8,8 +8,12 @@ import net.minecraft.block.material.Material;
 public class FeliModServerModBlocks
 {
 	public static Block BlockBento;
+
 	public static Block BlockFoodCraftTable;
-	public static Block BlockRiceCooker;
+
+	public static Block BlockRiceCookerIdle;
+	public static Block BlockRiceCookerActive;
+
 
 	public static void registerFeliModServerModBlocks()
 	{
@@ -19,7 +23,11 @@ public class FeliModServerModBlocks
 		BlockFoodCraftTable = new BlockFoodCraftTable().setBlockName("Food CraftTable");
 		GameRegistry.registerBlock(BlockFoodCraftTable, "Food CraftTable");
 
-		/*BlockRiceCooker = new BlockRiceCooker().setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerBlock(BlockRiceCooker, "Rice Cooker");*/
+		//機械
+		BlockRiceCookerIdle = new BlockRiceCooker(false).setBlockName("Rice Cooker Idle").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerBlock(BlockRiceCookerIdle, "RiceCookerIdle");
+
+		BlockRiceCookerActive = new BlockRiceCooker(true).setBlockName("Rice Cooker Active").setLightLevel(0.624F);
+		GameRegistry.registerBlock(BlockRiceCookerActive, "RiceCookerActive");
 	}
 }

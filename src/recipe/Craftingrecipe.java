@@ -6,8 +6,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class Craftingrecipe{
-	public static void registerFeliModServerModRecipes(){
-//ƒŒƒVƒs‚Ìƒƒ\ƒbƒh‚ğ’è‹`@–ß‚è’l–³‚µvoid@
+	public static void registerFeliModServerModCraftingRecipes(){
+//ï¿½ï¿½ï¿½Vï¿½sï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½ï¿½`ï¿½@ï¿½ß‚ï¿½lï¿½ï¿½ï¿½ï¿½voidï¿½@
         GameRegistry.addRecipe(new ItemStack(FeliModServerModItems.itemSaba),
                 "c",
                 "f",
@@ -15,7 +15,7 @@ public class Craftingrecipe{
                 'f', Items.fish,
                 'c', Items.coal
         );
-//ƒŒƒVƒs‚Ìİ’è@‚±‚±‚Ü‚Å‚Åˆê‚Â‚ÌƒŒƒVƒs
+//ï¿½ï¿½ï¿½Vï¿½sï¿½Ìİ’ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‚Åˆï¿½Â‚Ìƒï¿½ï¿½Vï¿½s
         GameRegistry.addRecipe(new ItemStack(FeliModServerModItems.itemSabakanFood),
                 "iii",
                 "isi",
