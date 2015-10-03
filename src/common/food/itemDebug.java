@@ -31,6 +31,8 @@ public class itemDebug extends Item
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced)
 	{
+		if (FeliModServerMod.serverproxy.isShiftKeyDown())
+		{
 		list.add("Debugger Item.");
 		list.add("Right-Click flyMode");
 
@@ -40,6 +42,7 @@ public class itemDebug extends Item
 			list.add(EnumChatFormatting.AQUA + "FlyingMode: " + EnumChatFormatting.RED + "enabled");
 		}else{
 			list.add(EnumChatFormatting.AQUA + "FlyingMode: " + EnumChatFormatting.RED + "disabled");
+		}
 		}
 	}
 }

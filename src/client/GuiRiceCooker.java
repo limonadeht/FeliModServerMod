@@ -22,6 +22,10 @@ public class GuiRiceCooker extends GuiContainer
 	    protected void drawGuiContainerBackgroundLayer(float partialTick, int mouseX, int mouseZ) {
 	        this.mc.renderEngine.bindTexture(TEXTURE);
 	        this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
+
+	        //センター寄せ
+	        this.drawCenteredString(this.fontRendererObj, "Rice Cooker", this.width / 2, 40, 0xFFFFFFFF);
+
 	    }
 
 	    /*GUIが開いている時にゲームの処理を止めるかどうか。*/

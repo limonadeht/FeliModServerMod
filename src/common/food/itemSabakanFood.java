@@ -44,8 +44,9 @@ public class itemSabakanFood extends Item
 	@Override
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-		if (FeliModServerMod.serverproxy.isShiftKeyDown()) 
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced)
+	{
+		if (FeliModServerMod.serverproxy.isShiftKeyDown())
 		{
 	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
 	        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
@@ -61,7 +62,7 @@ public class itemSabakanFood extends Item
 	        	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
 	        }
 	        list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
-	        
+
 		}
 		else
 		{
@@ -69,7 +70,7 @@ public class itemSabakanFood extends Item
 			list.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
 		}
 	}
-        
+
 
 	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
