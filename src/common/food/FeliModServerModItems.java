@@ -11,6 +11,7 @@ public class FeliModServerModItems
 	public static Item itemSabakanFood;
 	public static Item itemSaba;
 	public static Item itemDebug;
+	public static Item itemYakinikudonburi;
 
 	public static void registerFeliModServerItems()
 	{
@@ -28,5 +29,8 @@ public class FeliModServerModItems
 
 		itemDebug = new itemDebug().setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemDebug, "Debugger Item");
+		
+		itemYakinikudonburi = new itemYakinikudonburi(403, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemYakinikudonburi, "Yakinikudonburi");
 	}
 }
