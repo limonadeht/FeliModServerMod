@@ -3,6 +3,7 @@ package common.food;
 import java.util.List;
 
 import common.FeliModServerMod;
+import common.block.FeliModServerModBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,9 +15,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class itemSabakanFood extends Item
+public class itemYakinikudonburi_mk4 extends Item
 {
-
 	public final int itemUseDuration;
 	private final int healAmount;
 	private boolean alwaysEdible;
@@ -28,24 +28,28 @@ public class itemSabakanFood extends Item
 
 	private int HealthAmount;
 
+	private ItemStack emptyItem = null;
 
-	public itemSabakanFood(float par1, float par2, boolean par3)
+	public itemYakinikudonburi_mk4(float par1, float par2, boolean par3)
 	{
 		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		this.setMaxDamage(3);
-		this.setUnlocalizedName("felimodserver:limone_food");
-		this.saturationModifier = par2;
+		this.setUnlocalizedName("Yakinikudonburi");
 		this.itemUseDuration = 3;
-		this.healAmount = 30;
-		this.HealthAmount = 1;
+		this.healAmount = 1;
+		this.HealthAmount = 2; //HPの回復する量 1 = 0.5heart
+		this.saturationModifier = par2;
+		this.maxStackSize = 1;
+		this.setMaxDamage(32);
 		this.setNoRepair();
+		this.setTextureName("felimodserver:Yakinikudonburi");
 	}
 
 	@Override
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-        list.add("鯖管だけに、鯖缶 なんちって! :D");
+        list.add("焼肉丼");
+        list.add(EnumChatFormatting.DARK_GREEN + "Compressed: 32");
         list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
         list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
         list.add(EnumChatFormatting.DARK_RED + "Heal: " + HealthAmount);
@@ -58,10 +62,34 @@ public class itemSabakanFood extends Item
         	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
         }
         list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
-        }
+    }
+
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
+		if(par7 != 1){
+			return false;
+		}else{
+			if(player.canPlayerEdit(x, y + 1, z, par7, stack) && player.canPlayerEdit(x, y + 2, z, par7, stack)){
+				world.setBlock(x, y + 1, z, FeliModServerModBlocks.BlockBento);
+				world.notifyBlockOfNeighborChange(x, y + 1, z, FeliModServerModBlocks.BlockBento);
+				--stack.stackSize;
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
 
 	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
+
+		if (entityplayer.capabilities.isCreativeMode) {
+			itemstack.damageItem(1, entityplayer);
+	        entityplayer.getFoodStats().addStats(healAmount, potionEffectProbability);
+	        world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+	        this.onFoodEaten(itemstack, world, entityplayer);
+	        return itemstack;
+		}
+
 		//damageItem()で耐久値を1減らしている
         itemstack.damageItem(1, entityplayer);
         entityplayer.getFoodStats().addStats(healAmount, potionEffectProbability);
@@ -72,6 +100,8 @@ public class itemSabakanFood extends Item
 
 	protected void onFoodEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
+
+
         if (!world.isRemote && this.potionId > 0 && world.rand.nextFloat() < this.potionEffectProbability)
         {
             entityplayer.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20, this.potionAmplifier));
@@ -81,7 +111,7 @@ public class itemSabakanFood extends Item
 	//食べる速さ。デフォルト32
 	public int getMaxItemUseDuration(ItemStack itemstack)
     {
-        return 3;
+        return 40;
     }
 
 	public EnumAction getItemUseAction(ItemStack itemstack)
@@ -116,7 +146,7 @@ public class itemSabakanFood extends Item
         return this.saturationModifier;
     }
 
-	public itemSabakanFood setAlwaysEdible()
+	public itemYakinikudonburi_mk4 setAlwaysEdible()
     {
         this.alwaysEdible = true;
         return this;
@@ -125,6 +155,7 @@ public class itemSabakanFood extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconregister)
 	{
-		this.itemIcon = iconregister.registerIcon("felimodserver:limone_food");
+		this.itemIcon = iconregister.registerIcon("felimodserver:Yakinikudonburi");
 	}
+
 }

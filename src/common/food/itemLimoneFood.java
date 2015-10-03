@@ -45,7 +45,7 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
         list.add("This is Food using Energy");
         list.add("Pleace Energy Charged.");
-        list.add(EnumChatFormatting.GOLD + "HealAmount: " + healAmount);
+        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
 
         String potionid = this.getPotionEffect(itemStack);
         if(potionid == null)

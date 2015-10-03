@@ -12,6 +12,10 @@ public class FeliModServerModItems
 	public static Item itemSaba;
 	public static Item itemDebug;
 	public static Item itemYakinikudonburi;
+	public static Item itemYakinikudonburi_mk2;
+	public static Item itemYakinikudonburi_mk3;
+	public static Item itemYakinikudonburi_mk4;
+	public static Item itemYakinikudonburi_mk5;
 
 	public static void registerFeliModServerItems()
 	{
@@ -29,8 +33,20 @@ public class FeliModServerModItems
 
 		itemDebug = new itemDebug().setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemDebug, "Debugger Item");
-		
+
 		itemYakinikudonburi = new itemYakinikudonburi(403, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemYakinikudonburi, "Yakinikudonburi");
+
+		itemYakinikudonburi_mk2 = new itemYakinikudonburi_mk2(404, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemYakinikudonburi_mk2, "Yakinikudonburi Mk2");
+
+		itemYakinikudonburi_mk3 = new itemYakinikudonburi_mk3(405, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemYakinikudonburi_mk3, "Yakinikudonburi Mk3");
+
+		itemYakinikudonburi_mk4 = new itemYakinikudonburi_mk4(406, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemYakinikudonburi_mk4, "Yakinikudonburi Mk4");
+
+		itemYakinikudonburi_mk5 = new itemYakinikudonburi_mk5(407, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemYakinikudonburi_mk5, "Yakinikudonburi Mk5");
 	}
 }

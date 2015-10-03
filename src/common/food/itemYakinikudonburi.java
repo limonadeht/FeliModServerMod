@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class itemYakinikudonburi extends Item
 {
-	
+
 	public final int itemUseDuration;
 	private final int healAmount;
 	private boolean alwaysEdible;
@@ -27,27 +27,33 @@ public class itemYakinikudonburi extends Item
 	private float potionEffectProbability;
 	private final float saturationModifier;
 
+	private int HealthAmount;
+
 	private ItemStack emptyItem = null;
-	
+
 	public itemYakinikudonburi(float par1, float par2, boolean par3)
 	{
 		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		this.setUnlocalizedName("Yakinikudonburi");
 		this.itemUseDuration = 3;
 		this.healAmount = 1;
+		this.HealthAmount = 2; //HPの回復する量 1 = 0.5heart
 		this.saturationModifier = par2;
 		this.maxStackSize = 1;
 		this.setMaxDamage(1);
 		this.setNoRepair();
 		this.setTextureName("felimodserver:Yakinikudonburi");
 	}
-	
+
 	@Override
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
         list.add("焼肉丼");
-        list.add(EnumChatFormatting.GOLD + "HealAmount: " + healAmount);
+        list.add(EnumChatFormatting.DARK_GREEN + "Compressed: none");
+        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
+        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
+        list.add(EnumChatFormatting.DARK_RED + "Heal: " + HealthAmount);
 
         String potionid = this.getPotionEffect(itemStack);
         if(potionid == null)
@@ -76,7 +82,7 @@ public class itemYakinikudonburi extends Item
 
 	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
-		
+
 		if (entityplayer.capabilities.isCreativeMode) {
 			itemstack.damageItem(1, entityplayer);
 	        entityplayer.getFoodStats().addStats(healAmount, potionEffectProbability);
@@ -84,7 +90,7 @@ public class itemYakinikudonburi extends Item
 	        this.onFoodEaten(itemstack, world, entityplayer);
 	        return itemstack;
 		}
-		
+
 		//damageItem()で耐久値を1減らしている
         itemstack.damageItem(1, entityplayer);
         entityplayer.getFoodStats().addStats(healAmount, potionEffectProbability);
@@ -95,8 +101,8 @@ public class itemYakinikudonburi extends Item
 
 	protected void onFoodEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
-		
-		
+
+
         if (!world.isRemote && this.potionId > 0 && world.rand.nextFloat() < this.potionEffectProbability)
         {
             entityplayer.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20, this.potionAmplifier));
@@ -118,8 +124,15 @@ public class itemYakinikudonburi extends Item
     {
            if (entityplayer.canEat(this.alwaysEdible))
            {
+        	   int healthamount = HealthAmount;
+        	   HealthAmount = healthamount;
         	   //if(itemstack.getItemDamage() >= this.getMaxDamage() - 1)
                entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
+               entityplayer.heal(healthamount);
+               if(entityplayer.capabilities.isCreativeMode)
+               {
+            	   entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
+               }
            }
         return itemstack;
     }
