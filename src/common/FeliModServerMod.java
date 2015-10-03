@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import server.ServerProxy;
 
@@ -33,6 +34,8 @@ public class FeliModServerMod
 
 	public static final CreativeTabs tabFeliModServerMod = new tabFeliModServerMod("FeliModServerMod");
 
+	//Rice CookerのGuiId
+	 public static final int GUI_ID = 1;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
@@ -48,6 +51,8 @@ public class FeliModServerMod
 
 		serverproxy.registerRenderThings();
 		serverproxy.registerTileEntitySpecialRenderer();
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		//NetworkRegistry.INSTANCE().registerGuiHandler(Instance, GuiHandler);
 

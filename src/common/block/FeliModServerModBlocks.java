@@ -9,6 +9,7 @@ public class FeliModServerModBlocks
 {
 	public static Block BlockBento;
 	public static Block BlockFoodCraftTable;
+	public static Block BlockRiceCooker;
 
 	public static void registerFeliModServerModBlocks()
 	{
@@ -17,5 +18,8 @@ public class FeliModServerModBlocks
 
 		BlockFoodCraftTable = new BlockFoodCraftTable().setBlockName("Food CraftTable");
 		GameRegistry.registerBlock(BlockFoodCraftTable, "Food CraftTable");
+
+		BlockRiceCooker = new BlockRiceCooker().setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerBlock(BlockRiceCooker, "Rice Cooker");
 	}
 }
