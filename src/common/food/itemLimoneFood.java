@@ -43,19 +43,24 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-        list.add("This is Food using Energy");
-        list.add("Pleace Energy Charged.");
-        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
+		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+			list.add("This is Food using Energy");
+	        list.add("Pleace Energy Charged.");
+	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
 
-        String potionid = this.getPotionEffect(itemStack);
-        if(potionid == null)
-        {
-        	list.add(EnumChatFormatting.AQUA + "PotionEffect: none");
-        }else{
-        	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
-        }
-        list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
-        list.add(EnumChatFormatting.DARK_GRAY + "StoredEnergy: " + this.getEnergyStored(itemStack) + "/" + this.getMaxEnergyStored(itemStack));
+	        String potionid = this.getPotionEffect(itemStack);
+	        if(potionid == null)
+	        {
+	        	list.add(EnumChatFormatting.AQUA + "PotionEffect: none");
+	        }else{
+	        	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
+	        }
+	        list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
+	        list.add(EnumChatFormatting.DARK_GRAY + "StoredEnergy: " + this.getEnergyStored(itemStack) + "/" + this.getMaxEnergyStored(itemStack));
+		}else{
+			list.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
+		}
+        
     }
 
 	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)

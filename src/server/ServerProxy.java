@@ -15,4 +15,8 @@ public class ServerProxy
 	{
 		GameRegistry.registerTileEntity(TileEntityBento.class, FeliModServerMod.MOD_ID + ":TileBento");
 	}
+	
+	public boolean isShiftKeyDown() {
+		return false;
+	}
 }

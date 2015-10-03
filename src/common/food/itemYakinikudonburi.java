@@ -49,20 +49,26 @@ public class itemYakinikudonburi extends Item
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-        list.add("焼肉丼");
-        list.add(EnumChatFormatting.DARK_GREEN + "Compressed: none");
-        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
-        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
-        list.add(EnumChatFormatting.DARK_RED + "Heal: " + HealthAmount);
+		
+		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+			list.add("焼肉丼");
+	        list.add(EnumChatFormatting.DARK_GREEN + "Compressed: none");
+	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
+	        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
+	        list.add(EnumChatFormatting.DARK_RED + "Heal: " + HealthAmount);
 
-        String potionid = this.getPotionEffect(itemStack);
-        if(potionid == null)
-        {
-        	list.add(EnumChatFormatting.AQUA + "PotionEffect: none");
-        }else{
-        	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
-        }
-        list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
+	        String potionid = this.getPotionEffect(itemStack);
+	        if(potionid == null)
+	        {
+	        	list.add(EnumChatFormatting.AQUA + "PotionEffect: none");
+	        }else{
+	        	list.add(EnumChatFormatting.AQUA + "PotionEffect: " + potionId + potionDuration);
+	        }
+	        list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());
+		}else {
+			list.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
+		}
+        
     }
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
