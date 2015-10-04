@@ -31,7 +31,7 @@ public class BlockRiceCooker extends BlockContainer
 
 	  private final boolean isActive;
 
-	  private static boolean keeoInventory;
+	  private static boolean keepInventory;
 
 	  public BlockRiceCooker(boolean isActive)
 	  {
@@ -141,7 +141,7 @@ public class BlockRiceCooker extends BlockContainer
 		int i= worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
 		TileEntity tileentity = worldObj.getTileEntity(xCoord, yCoord, zCoord);
-		keeoInventory = true;
+		keepInventory = true;
 
 		if(active){
 			worldObj.setBlock(xCoord, yCoord, zCoord, FeliModServerModBlocks.BlockRiceCookerActive);
@@ -149,7 +149,7 @@ public class BlockRiceCooker extends BlockContainer
 			worldObj.setBlock(xCoord, yCoord, zCoord, FeliModServerModBlocks.BlockRiceCookerIdle);
 		}
 
-		keeoInventory = false;
+		keepInventory = false;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, i, 2);
 
 		if(tileentity != null){

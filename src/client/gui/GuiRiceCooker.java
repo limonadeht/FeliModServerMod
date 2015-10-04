@@ -15,7 +15,7 @@ public class GuiRiceCooker extends GuiContainer{
 	public TileEntityRiceCooker ricecooker;
 
 	public GuiRiceCooker(InventoryPlayer inventoryplayer, TileEntityRiceCooker entity){
-		super(new RiceCookerContainer(inventoryplayer, entity));
+		super(RiceCookerContainer(inventoryplayer, entity));
 
 		this.ricecooker=entity;
 

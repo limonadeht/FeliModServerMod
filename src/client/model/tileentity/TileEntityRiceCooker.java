@@ -48,38 +48,57 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 
 	@Override
 	public ItemStack getStackInSlot(int ver1) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return this.slots[ver1];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int ver1, int ver2) {
-		// TODO 自動生成されたメソッド・スタブ
+		if(this.slots[ver1] != null){
+			ItemStack itemstack;
+
+			if(this.slots[ver1].stackSize <= ver2){
+				itemstack = this.slots[ver1];
+				this.slots[ver1] =null;
+				return itemstack;
+			}else{
+				itemstack = this.slots[ver1].splitStack(ver2);
+
+				if(this.slots[ver1].stackSize == 0){
+					this.slots[ver1] =null;
+				}
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int ver1) {
-		// TODO 自動生成されたメソッド・スタブ
+		if(this.slots[ver1] != null){
+			ItemStack itemstack = this.slots[ver1];
+			this.slots[ver1] =null;
+			return itemstack;
+		}
 		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int ver1, ItemStack itemstack) {
-		// TODO 自動生成されたメソッド・スタブ
+		this.slots[ver1] = itemstack;
+
+		if(itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()){
+			itemstack.stackSize = this.getInventoryStackLimit();
+		}
 
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 64;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void openInventory() {}

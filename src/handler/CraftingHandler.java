@@ -1,4 +1,4 @@
-package recipe;
+package handler;
 
 public class CraftingHandler {
 
