@@ -49,7 +49,7 @@ public class BlockRiceCooker extends BlockContainer
 	  @SideOnly(Side.CLIENT)
 		public void registerBlockIcons(IIconRegister iconregister) {
 			icons[0] = iconregister.registerIcon("felimodserver:rice_cooker_side");
-			icons[1] = iconregister.registerIcon(this.isActive ? "felimodserver:rice_cooker_active" : "rice_cooker_inactive");
+			icons[1] = iconregister.registerIcon(this.isActive ? "felimodserver:rice_cooker_active" : "felimodserver:rice_cooker_inactive");
 			icons[2] = iconregister.registerIcon("felimodserver:rice_cooker_top");
 		}
 

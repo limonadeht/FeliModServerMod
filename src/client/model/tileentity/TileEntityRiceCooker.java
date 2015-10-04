@@ -1,6 +1,8 @@
 package client.model.tileentity;
 
+import common.FeliModServerMod;
 import common.block.BlockRiceCooker;
+import common.food.FeliModServerModItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -122,8 +124,6 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 			if(item instanceof ItemBlock && Block.getBlockFromItem(item)!= Blocks.air){
 				Block block = Block.getBlockFromItem(item);
 
-				//ここに燃料登録。
-				//if(アイテムかブロックか　== それは何か)return どれだけ燃焼するか;
 				if(item == Items.coal)return 1600;
 				if(item == Items.stick)return 100;
 				if(block == Blocks.sapling)return 100;
@@ -134,6 +134,32 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 			}
 		}
 		return 0;
+	}
+
+
+	public static boolean isItemSource (ItemStack itemstack){
+		return getItemSource(itemstack) != null;
+	}
+
+	private static Item getItemSource(ItemStack itemstack) {
+		if(itemstack == null){
+			return null;
+		}else{
+			Item item = itemstack.getItem();
+
+			if(item instanceof ItemBlock && Block.getBlockFromItem(item)!= Blocks.air){
+				//Block block = Block.getBlockFromItem(item);
+
+//				if(item == Items.coal)return 1600;
+//				if(item == Items.stick)return 100;
+//				if(block == Blocks.sapling)return 100;
+//				if(item == Items.blaze_rod)return 2400;
+//				if(block == Blocks.coal_block)return 14400;
+
+				return GameRegistry.findItem(FeliModServerMod.MOD_ID, FeliModServerModItems.itemSaba.toString());
+			}
+		}
+		return null;
 	}
 
 	public boolean isBurning(){
