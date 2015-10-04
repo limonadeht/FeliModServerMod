@@ -5,7 +5,9 @@ import common.block.FeliModServerModBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemSeeds;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class FeliModServerModItems
 {
@@ -62,22 +64,23 @@ public class FeliModServerModItems
 		GameRegistry.registerItem(itemRiceSeed, "Rice Seed");
 
 
-		/*
-		itemFooderArmorHelmet = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+		IItemArmor.ArmorMaterial itemArmor = EnumHelper.addArmorMaterial("FeliModServerItemArmor", 50, new int[]{5,10,8,5}, 5);
+		itemArmor.customCraftingMaterial = FeliModServerModItems.itemSaba;
+
+		itemFooderArmorHelmet = new ItemArmor(itemArmor, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
 				.setUnlocalizedName("fooder_armor_helmet");
 		GameRegistry.registerItem(itemFooderArmorHelmet, "fooder_armor_helmet");
 
-		itemFooderArmorChestPlate = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+		itemFooderArmorChestPlate = new ItemArmor(itemArmor, 0, 1).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
 				.setUnlocalizedName("fooder_armor_chestplate");
 		GameRegistry.registerItem(itemFooderArmorChestPlate, "fooder_armor_chestplate");
 
-		itemFooderArmorLeggings = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+		itemFooderArmorLeggings = new ItemArmor(itemArmor, 0, 2).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
 				.setUnlocalizedName("fooder_armor_leggings");
 		GameRegistry.registerItem(itemFooderArmorLeggings, "fooder_armor_leggings");
 
-		itemFooderArmorBoots = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+		itemFooderArmorBoots = new ItemArmor(itemArmor, 0, 3).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
 				.setUnlocalizedName("fooder_armor_boots");
 		GameRegistry.registerItem(itemFooderArmorBoots, "fooder_armor_boots");
-		*/
 	}
 }
