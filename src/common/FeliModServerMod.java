@@ -12,13 +12,16 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import handler.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import recipe.Craftingrecipe;
 import recipe.RiceCookerRecipes;
 import server.ServerProxy;
 
 /**
  *
- * @author Lemon, isuzu
+ * @author Lemon1232
+ * @author isuzu_shiranui
+ * @author hayan0722
  *
  */
 
@@ -38,7 +41,8 @@ public class FeliModServerMod
 
 
 
-	public static final CreativeTabs tabFeliModServerMod = new tabFeliModServerMod("FeliModServerMod");
+	//CreativeTabクラッシュ回避のため該当クラスを削除、メインクラスにてクリエイティブタブの生成を行うように
+	//public static final CreativeTabs tabFeliModServerMod = new tabFeliModServerMod("FeliModServerMod");
 
 	//Rice CookerのGuiId
 	 public static final int GUI_ID = 1;
@@ -60,7 +64,7 @@ public class FeliModServerMod
 		serverproxy.registerRenderThings();
 		serverproxy.registerTileEntitySpecialRenderer();
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(FeliModServerMod.Instance, new GuiHandler());
 
 		GameRegistry.registerTileEntity(TileEntityRiceCooker.class, "BlockRiceCooker");
 
@@ -70,4 +74,13 @@ public class FeliModServerMod
 		//わけわからないのでいったん見送ります。
 		//MinecraftForgeClient.registerItemRenderer(FeliModServerModItems.itemFoodsample, (IItemRenderer)new ItemRenderBento());
     }
+
+	public static CreativeTabs tabFeliModServerMod
+    = new CreativeTabs("FeliModServer")
+{
+    public Item getTabIconItem()
+    {
+        return FeliModServerModItems.itemYakinikudonburi;
+    }
+};
 }

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -19,10 +20,14 @@ import net.minecraft.world.World;
 
 public class BlockRiceCooker extends BlockContainer
 {
+	/*
 	  @SideOnly(Side.CLIENT)
-	  private IIcon TopIcon;
+	  private IIcon top;
 	  @SideOnly(Side.CLIENT)
-	  private IIcon field_149986_M;
+	  private IIcon front;
+	  */
+
+	private IIcon[] icons = new IIcon[3];
 
 	  private final boolean isActive;
 
@@ -39,12 +44,30 @@ public class BlockRiceCooker extends BlockContainer
 		  this.isActive=isActive;
 	  }
 
+	  @SideOnly(Side.CLIENT)
+		public void registerBlockIcons(IIconRegister iconregister) {
+			icons[0] = iconregister.registerIcon("felimodserver:rice_cooker_side");
+			icons[1] = iconregister.registerIcon(this.isActive ? "felimodserver:rice_cooker_active" : "rice_cooker_inactive");
+			icons[2] = iconregister.registerIcon("felimodserver:rice_cooker_top");
+		}
+
+	  public IIcon getIcon(int side, int meta) {
+			if (side == 1) {
+				return icons[2];
+			} else if (side == 3) {
+				return icons[1];
+			} else {
+				return this.icons[0];
+			}
+		}
+
 
 	  public Item getItemDropped(World world, int x, int y, int z){
 		  return Item.getItemFromBlock(FeliModServerModBlocks.BlockRiceCookerIdle);
 
 	  }
 
+	  //public void onBlockAppend(World world, int x, int y, int z){
 	  public void onBlockAppend(World world, int x, int y, int z){
 		  super.onBlockAdded(world, x, y, z);
 		  this.setDefaultDirection(world, x, y, z);

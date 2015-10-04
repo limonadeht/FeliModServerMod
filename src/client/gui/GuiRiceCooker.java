@@ -5,8 +5,8 @@ import common.FeliModServerMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import server.RiceCookerContainer;
 
 public class GuiRiceCooker extends GuiContainer{
 
@@ -15,7 +15,7 @@ public class GuiRiceCooker extends GuiContainer{
 	public TileEntityRiceCooker ricecooker;
 
 	public GuiRiceCooker(InventoryPlayer inventoryplayer, TileEntityRiceCooker entity){
-		super(ContainerRiceCooker(inventoryplayer,entity));
+		super(new RiceCookerContainer(inventoryplayer, entity));
 
 		this.ricecooker=entity;
 
@@ -30,7 +30,7 @@ public class GuiRiceCooker extends GuiContainer{
 		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize-96+2, 4210752);
 	}
 
-	@override
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float ver1, int ver2, int ver3){
 
 	}

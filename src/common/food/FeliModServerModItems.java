@@ -1,8 +1,11 @@
 package common.food;
 
 import common.FeliModServerMod;
+import common.block.FeliModServerModBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSeeds;
 
 public class FeliModServerModItems
 {
@@ -16,6 +19,12 @@ public class FeliModServerModItems
 	public static Item itemYakinikudonburi_mk3;
 	public static Item itemYakinikudonburi_mk4;
 	public static Item itemYakinikudonburi_mk5;
+	public static Item itemRiceSeed;
+
+	public static Item itemFooderArmorHelmet;
+	public static Item itemFooderArmorChestPlate;
+	public static Item itemFooderArmorLeggings;
+	public static Item itemFooderArmorBoots;
 
 	public static void registerFeliModServerItems()
 	{
@@ -48,5 +57,27 @@ public class FeliModServerModItems
 
 		itemYakinikudonburi_mk5 = new itemYakinikudonburi_mk5(407, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemYakinikudonburi_mk5, "Yakinikudonburi Mk5");
+
+		itemRiceSeed = new ItemSeeds(FeliModServerModBlocks.BlockRice, Blocks.farmland).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerItem(itemRiceSeed, "Rice Seed");
+
+
+		/*
+		itemFooderArmorHelmet = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setUnlocalizedName("fooder_armor_helmet");
+		GameRegistry.registerItem(itemFooderArmorHelmet, "fooder_armor_helmet");
+
+		itemFooderArmorChestPlate = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setUnlocalizedName("fooder_armor_chestplate");
+		GameRegistry.registerItem(itemFooderArmorChestPlate, "fooder_armor_chestplate");
+
+		itemFooderArmorLeggings = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setUnlocalizedName("fooder_armor_leggings");
+		GameRegistry.registerItem(itemFooderArmorLeggings, "fooder_armor_leggings");
+
+		itemFooderArmorBoots = new IItemArmor(null, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setUnlocalizedName("fooder_armor_boots");
+		GameRegistry.registerItem(itemFooderArmorBoots, "fooder_armor_boots");
+		*/
 	}
 }

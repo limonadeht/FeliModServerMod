@@ -20,7 +20,7 @@ public class ClientProxy extends ServerProxy
 	{
 
 	}
-	
+
 	@Override
 	public boolean isShiftKeyDown() {
 		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
@@ -23,6 +24,21 @@ public class itemDebug extends Item
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		entityplayer.capabilities.allowFlying = !entityplayer.capabilities.allowFlying;
+		entityplayer.capabilities.disableDamage = !entityplayer.capabilities.disableDamage;
+
+
+		int i = (int) world.getWorldTime();
+		if(world.isRemote)
+		{
+		if(i <= 1000)
+		{
+			world.setWorldTime(world.getWorldTime() + 100);
+			entityplayer.addChatComponentMessage(new ChatComponentText("Gooooooooooooooooooo!"));
+		}else{
+			world.setWorldTime(world.getWorldTime() + 200);
+			entityplayer.addChatComponentMessage(new ChatComponentText("Gooooooooooooooooooo!"));
+		}
+		}
 		return super.onItemRightClick(itemstack, world, entityplayer);
 	}
 
