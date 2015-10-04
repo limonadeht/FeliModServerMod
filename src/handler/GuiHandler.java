@@ -13,16 +13,10 @@ public class GuiHandler implements IGuiHandler{
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-TileEntity entiry = world.getTileEntity(x, y, z);
+		TileEntity entiry = world.getTileEntity(x, y, z);
 
-		if(entiry!=null){
-			switch(ID){
-			case FeliModServerMod.GUI_ID:
-				if(entiry instanceof TileEntityRiceCooker){
-					return new ContainerRiceCooker(player.inventory,(TileEntityRiceCooker)entiry);
-				}
-				return null;
-			}
+		if(entiry instanceof TileEntityRiceCooker){
+			return new ContainerRiceCooker(player.inventory,(TileEntityRiceCooker)entiry);
 		}
 		return null;
 	}
@@ -31,14 +25,8 @@ TileEntity entiry = world.getTileEntity(x, y, z);
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entiry = world.getTileEntity(x, y, z);
 
-		if(entiry!=null){
-			switch(ID){
-			case FeliModServerMod.GUI_ID:
-				if(entiry instanceof TileEntityRiceCooker){
-					return new GuiRiceCooker(player.inventory,(TileEntityRiceCooker)entiry);
-				}
-				return null;
-			}
+		if(entiry instanceof TileEntityRiceCooker){
+			return new GuiRiceCooker(player.inventory,(TileEntityRiceCooker)entiry);
 		}
 		return null;
 	}

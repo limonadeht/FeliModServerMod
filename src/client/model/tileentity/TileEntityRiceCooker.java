@@ -1,10 +1,8 @@
 package client.model.tileentity;
 
 import common.block.BlockRiceCooker;
-import common.food.FeliModServerModItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -12,6 +10,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
@@ -242,8 +242,36 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 		return ver3!=0||ver1!=1||itemstack.getItem()==Items.bucket;
 	}
 
+	@Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+            super.readFromNBT(tagCompound);
+            NBTTagList tagList = tagCompound.getTagList("Inventory", 0);
+            for (int i = 0; i < tagList.tagCount(); i++) {
+                    NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
+                    byte slot = tag.getByte("Slot");
+                    if (slot >= 0 && slot < slots.length) {
+                    	slots[slot] = ItemStack.loadItemStackFromNBT(tag);
+                    }
+            }
+	}
 
 
+	 @Override
+     public void writeToNBT(NBTTagCompound tagCompound) {
+             super.writeToNBT(tagCompound);
+
+             NBTTagList itemList = new NBTTagList();
+             for (int i = 0; i < slots.length; i++) {
+                     ItemStack stack = slots[i];
+                     if (stack != null) {
+                             NBTTagCompound tag = new NBTTagCompound();
+                             tag.setByte("Slot", (byte) i);
+                             stack.writeToNBT(tag);
+                             itemList.appendTag(tag);
+                     }
+             }
+             tagCompound.setTag("Inventory", itemList);
+     }
 
 
 

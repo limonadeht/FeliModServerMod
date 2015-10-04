@@ -45,7 +45,7 @@ public class FeliModServerMod
 	//public static final CreativeTabs tabFeliModServerMod = new tabFeliModServerMod("FeliModServerMod");
 
 	//Rice CookerのGuiId
-	 public static final int GUI_ID = 1;
+	 public static final int RiceCookerGUI_ID = 1;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
@@ -68,7 +68,6 @@ public class FeliModServerMod
 
 		GameRegistry.registerTileEntity(TileEntityRiceCooker.class, "BlockRiceCooker");
 
-		//NetworkRegistry.INSTANCE().registerGuiHandler(Instance, GuiHandler);
 
 		//アイテムを3D描画する
 		//わけわからないのでいったん見送ります。

@@ -26,7 +26,7 @@ public class FeliModServerModBlocks
 		GameRegistry.registerBlock(BlockFoodCraftTable, "Food CraftTable");
 
 		//機械
-		BlockRiceCookerIdle = new BlockRiceCooker(false).setBlockName("Rice Cooker Idle").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		BlockRiceCookerIdle = new BlockRiceCooker(false).setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerBlock(BlockRiceCookerIdle, "RiceCookerIdle");
 
 		BlockRiceCookerActive = new BlockRiceCooker(true).setBlockName("Rice Cooker Active").setLightLevel(0.624F);

@@ -1,4 +1,4 @@
-package common;
+package recipe;
 
 import net.minecraft.init.Blocks;
 

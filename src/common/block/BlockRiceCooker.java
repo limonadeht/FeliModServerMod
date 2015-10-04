@@ -36,10 +36,12 @@ public class BlockRiceCooker extends BlockContainer
 	  public BlockRiceCooker(boolean isActive)
 	  {
 		  super(Material.iron);
+		  /*
 		  this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		  this.setHardness(5.0F);
 		  this.setBlockName("Rice Cooker");
 		  this.setStepSound(soundTypeAnvil);
+		  */
 
 		  this.isActive=isActive;
 	  }
@@ -67,7 +69,6 @@ public class BlockRiceCooker extends BlockContainer
 
 	  }
 
-	  //public void onBlockAppend(World world, int x, int y, int z){
 	  public void onBlockAppend(World world, int x, int y, int z){
 		  super.onBlockAdded(world, x, y, z);
 		  this.setDefaultDirection(world, x, y, z);
@@ -103,9 +104,12 @@ public class BlockRiceCooker extends BlockContainer
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
-		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, FeliModServerMod.Instance, FeliModServerMod.GUI_ID, world, x, y, z);
+
+		TileEntity tileentity = world.getTileEntity(x, y, z);
+		if(tileentity == null || player.isSneaking()){
+			return false;
 		}
+		player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
 
 		return true;
 	}
