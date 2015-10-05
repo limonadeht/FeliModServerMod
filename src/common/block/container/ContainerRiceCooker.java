@@ -19,9 +19,9 @@ public class ContainerRiceCooker extends Container{
 	public int lastcurrentItemBurnTime;
 	public int lastcookTime;
 
-	static final int sourceSize = 2;
-	static final int fuelSize = 3;
-	static final int productSize = 5;
+	static final int sourceSize = 1;
+	static final int fuelSize = 1;
+	static final int productSize = 1;
 	static final int inventorySize = 27;
 	static final int hotbarSize = 9;
 
