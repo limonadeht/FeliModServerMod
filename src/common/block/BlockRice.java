@@ -1,6 +1,6 @@
 package common.block;
 
-import common.food.FeliModServerModItems;
+import common.item.FeliModServerModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockCrops;

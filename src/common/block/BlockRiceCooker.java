@@ -2,7 +2,6 @@ package common.block;
 
 import client.model.tileentity.TileEntityRiceCooker;
 import common.FeliModServerMod;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

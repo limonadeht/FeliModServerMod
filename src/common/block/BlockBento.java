@@ -4,7 +4,7 @@ import java.util.Random;
 
 import client.model.tileentity.TileEntityBento;
 import common.FeliModServerMod;
-import common.food.FeliModServerModItems;
+import common.item.FeliModServerModItems;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;

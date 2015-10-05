@@ -60,7 +60,7 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
 		}else{
 			list.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
 		}
-        
+
     }
 
 	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
@@ -128,13 +128,13 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate)
 	{
-		return 0;
+		return 80;
 	}
 
 	@Override
 	public int getEnergyStored(ItemStack container)
 	{
-		return 1000;
+		return 100;
 	}
 
 	@Override

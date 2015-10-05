@@ -2,7 +2,7 @@ package common;
 
 import client.model.tileentity.TileEntityRiceCooker;
 import common.block.FeliModServerModBlocks;
-import common.food.FeliModServerModItems;
+import common.item.FeliModServerModItems;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;

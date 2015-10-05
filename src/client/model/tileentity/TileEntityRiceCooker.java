@@ -2,7 +2,7 @@ package client.model.tileentity;
 
 import common.FeliModServerMod;
 import common.block.BlockRiceCooker;
-import common.food.FeliModServerModItems;
+import common.item.FeliModServerModItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
