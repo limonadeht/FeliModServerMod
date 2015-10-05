@@ -2,7 +2,6 @@ package handler;
 
 import client.gui.GuiRiceCooker;
 import client.model.tileentity.TileEntityRiceCooker;
-import common.FeliModServerMod;
 import common.block.container.ContainerRiceCooker;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;

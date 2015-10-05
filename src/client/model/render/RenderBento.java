@@ -1,4 +1,4 @@
-package client.model.tileentity;
+package client.model.render;
 
 import org.lwjgl.opengl.GL11;
 

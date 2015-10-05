@@ -140,6 +140,7 @@ public class BlockRiceCooker extends BlockContainer
 	}
 
 
+
 	public static void updateRiceCookerState(boolean active, World worldObj, int xCoord, int yCoord, int zCoord) {
 		int i= worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 

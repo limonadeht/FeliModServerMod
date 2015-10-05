@@ -10,6 +10,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+import recipe.RiceCookerRecipes;
 
 public class ContainerRiceCooker extends Container{
 
@@ -18,18 +19,6 @@ public class ContainerRiceCooker extends Container{
 	public int lastburnTime;
 	public int lastcurrentItemBurnTime;
 	public int lastcookTime;
-
-	static final int sourceSize = 1;
-	static final int fuelSize = 1;
-	static final int productSize = 1;
-	static final int inventorySize = 27;
-	static final int hotbarSize = 9;
-
-	static final int sourceIndex = 0;
-	static final int fuelIndex = sourceIndex + sourceSize;
-	static final int productIndex = fuelIndex + fuelSize;
-	static final int inventoryIndex = productIndex + productSize;
-	static final int hotbarIndex = inventoryIndex + inventorySize;
 
 
 	public ContainerRiceCooker(InventoryPlayer inventory,TileEntityRiceCooker tileentity){
@@ -66,10 +55,10 @@ public class ContainerRiceCooker extends Container{
 				icrafting.sendProgressBarUpdate(this, 0, this.ricecooker.cookTime);
 			}
 			if(this.lastburnTime != this.ricecooker.cookTime){
-				icrafting.sendProgressBarUpdate(this, 0, this.ricecooker.burnTime);
+				icrafting.sendProgressBarUpdate(this, 1, this.ricecooker.burnTime);
 			}
 			if(this.lastcurrentItemBurnTime != this.ricecooker.cookTime){
-				icrafting.sendProgressBarUpdate(this, 0, this.ricecooker.currentItemBurnTime);
+				icrafting.sendProgressBarUpdate(this, 2, this.ricecooker.currentItemBurnTime);
 			}
 		}
 
@@ -79,129 +68,97 @@ public class ContainerRiceCooker extends Container{
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int slot, int newValue){
+	public void updateProgressBar(int par1, int par2){
+		if (par1 == 0)
+		{
+			this.ricecooker.cookTime = par2;
+		}
 
+		if (par1 == 1)
+		{
+			this.ricecooker.burnTime = par2;
+		}
+
+		if (par1 == 2)
+		{
+			this.ricecooker.currentItemBurnTime = par2;
+		}
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		// TODO 自動生成されたメソッド・スタブ
-		return true;
+		return this.ricecooker.isUseableByPlayer(entityplayer);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int per2) {
-		//クリックされたスロットを取得
-		Slot slot = (Slot)this.inventorySlots.get(per2);
-		if(slot == null) {
-			return null;
-		}
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int par2) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot)this.inventorySlots.get(par2);
 
-		if(slot.getHasStack() == false) {
-			return null;
-		}
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
 
-		//クリックされたスロットのItemStackを取得
-		ItemStack itemStack = slot.getStack();
+			if (par2 == 2)
+			{
 
-		//書き換えるた後比較したいので変更前のItemStackの状態を保持しておく
-		ItemStack itemStackOrg = slot.getStack().copy();
-
-		//素材スロットがクリックされたらインベントリかホットバーの空いてるスロットに移動
-		if(sourceIndex <= per2 && per2 <= sourceIndex + sourceSize) {
-			if (!this.mergeItemStack(itemStack, inventoryIndex, inventoryIndex + inventorySize + hotbarSize, false)) {
-				return null;
-			}
-
-			slot.onSlotChange(itemStack, itemStackOrg);
-		}
-		//燃料スロットがクリックされた
-		else if(fuelIndex <= per2 && per2 < fuelIndex + fuelSize) {
-			//素材アイテムか判定（※isSourceItemはこのサンプルでは実装されていないメソッドです）
-			if(TileEntityRiceCooker.isItemSource(itemStack)) {
-				//素材アイテムなので素材スロットへ移動
-				if (!this.mergeItemStack(itemStack, sourceIndex, sourceIndex + sourceSize, false)) {
+				if (!this.mergeItemStack(itemstack1, 3, 39, true))
+				{
 					return null;
 				}
 
-				slot.onSlotChange(itemStack, itemStackOrg);
+				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else {
-				//素材アイテムではないのでインベントリかホットバーの空いてるスロットに移動
-				if (!this.mergeItemStack(itemStack, inventoryIndex, inventoryIndex + inventorySize + hotbarSize, false)) {
+			else if (par2 != 1 && par2 != 0)
+			{
+				if (RiceCookerRecipes.smelting().getSmeltingResult(itemstack1) != null)
+				{
+					if (!this.mergeItemStack(itemstack1, 0, 1, false))
+					{
+						return null;
+					}
+					else if (TileEntityRiceCooker.isItemFuel(itemstack1))
+					{
+						if (!this.mergeItemStack(itemstack1, 1, 2, false))
+						{
+							return null;
+						}
+					}
+					else if (par2 >= 3 && par2 < 30)
+					{
+						if (!this.mergeItemStack(itemstack1, 30, 39, false))
+						{
+							return null;
+						}
+					}
+					else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+					{
+						return null;
+					}
+				}
+				else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+				{
 					return null;
 				}
 
-				slot.onSlotChange(itemStack, itemStackOrg);
-			}
-		}
-		// 結果スロットがクリックされたらインベントリかホットバーの空いてるスロットに移動
-		else if(productIndex <= per2 && per2 < productIndex + productSize) {
-			if (!this.mergeItemStack(itemStack, inventoryIndex, inventoryIndex + inventorySize + hotbarSize, false)) {
-				return null;
-			}
+				if (itemstack1.stackSize == 0)
+				{
+					slot.putStack((ItemStack)null);
+				}
+				else
+				{
+					slot.onSlotChanged();
+				}
 
-			slot.onSlotChange(itemStack, itemStackOrg);
-		}
-		//インベントリがクリックされた
-		else if(inventoryIndex <= per2 && per2 < inventoryIndex + inventorySize) {
-			if(TileEntityRiceCooker.isItemSource(itemStack)) {
-				//素材アイテムなので素材スロットへ移動
-				if (!this.mergeItemStack(itemStack, sourceIndex, sourceIndex + sourceSize, false)) {
+				if (itemstack1.stackSize == itemstack.stackSize)
+				{
 					return null;
 				}
-			}
-			else if(TileEntityRiceCooker.isItemFuel(itemStack)) {
-				//燃料アイテムなので燃料スロットへ移動
-				if (!this.mergeItemStack(itemStack, fuelIndex, fuelIndex + fuelSize, false)) {
-					return null;
-				}
-			}
-			else {
-				//どちらでもないのでホットバーに移動
-				if (!this.mergeItemStack(itemStack, hotbarIndex, hotbarIndex + hotbarSize, false)) {
-					return null;
-				}
-			}
-		}
-		//ホットバーがクリックされた
-		else if(hotbarIndex <= per2 && per2 < hotbarIndex + hotbarSize) {
-			if(TileEntityRiceCooker.isItemSource(itemStack)) {
-				//素材アイテムなので素材スロットへ移動
-				if (!this.mergeItemStack(itemStack, sourceIndex, sourceIndex + sourceSize, false)) {
-					return null;
-				}
-			}
-			else if(TileEntityRiceCooker.isItemFuel(itemStack)) {
-				//燃料アイテムなので燃料スロットへ移動
-				if (!this.mergeItemStack(itemStack, fuelIndex, fuelIndex + fuelSize, false)) {
-					return null;
-				}
-			}
-			else {
-				//どちらでもないのでインベントリに移動
-				if (!this.mergeItemStack(itemStack, inventoryIndex, inventoryIndex + inventorySize, false)) {
-					return null;
-				}
-			}
-		}
 
-		//シフトクリックで移動先スロットが溢れなかった場合は移動元スロットを空にする
-		if (itemStack.stackSize == 0) {
-			slot.putStack((ItemStack)null);
+				slot.onPickupFromSlot(entityplayer, itemstack1);
+			}
 		}
-		//移動先スロットが溢れた場合は数だけ変わって元スロットにアイテムが残るので更新通知
-		else {
-			slot.onSlotChanged();
-		}
-
-		//シフトクリック前後で数が変わらなかった＝移動失敗
-		if (itemStack.stackSize == itemStackOrg.stackSize) {
-			return null;
-		}
-
-		slot.onPickupFromSlot(entityplayer, itemStack);
-
-		return itemStackOrg;
+		return itemstack;
 	}
 }

@@ -2,7 +2,7 @@ package client;
 
 import org.lwjgl.input.Keyboard;
 
-import client.model.tileentity.RenderBento;
+import client.model.render.RenderBento;
 import client.model.tileentity.TileEntityBento;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
