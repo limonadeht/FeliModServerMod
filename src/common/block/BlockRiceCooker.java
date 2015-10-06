@@ -26,7 +26,10 @@ public class BlockRiceCooker extends BlockContainer
 	  private IIcon front;
 	  */
 
-	private IIcon[] icons = new IIcon[3];
+	 @SideOnly(Side.CLIENT)
+	 private IIcon top;
+	 @SideOnly(Side.CLIENT)
+	 private IIcon front;
 
 	  private final boolean isActive;
 
@@ -47,19 +50,21 @@ public class BlockRiceCooker extends BlockContainer
 
 	  @SideOnly(Side.CLIENT)
 		public void registerBlockIcons(IIconRegister iconregister) {
-			icons[0] = iconregister.registerIcon("felimodserver:rice_cooker_side");
-			icons[1] = iconregister.registerIcon(this.isActive ? "felimodserver:rice_cooker_active" : "felimodserver:rice_cooker_inactive");
-			icons[2] = iconregister.registerIcon("felimodserver:rice_cooker_top");
+			this.blockIcon = iconregister.registerIcon("felimodserver:rice_cooker_side");
+			this.front = iconregister.registerIcon(this.isActive ? "felimodserver:rice_cooker_active" : "felimodserver:rice_cooker_inactive");
+			this.top = iconregister.registerIcon("felimodserver:rice_cooker_top");
 		}
 
+	  @SideOnly(Side.CLIENT)
 	  public IIcon getIcon(int side, int meta) {
-			if (side == 1) {
-				return icons[2];
-			} else if (side == 3) {
-				return icons[1];
-			} else {
-				return this.icons[0];
-			}
+//			if (side == 1) {
+//				return top;
+//			} else if (side == 3) {
+//				return front;
+//			} else {
+//				return this.blockIcon;
+//			}
+		  return side == 1 ? this.top : (side == 0 ? this.top : (side != meta ? this.blockIcon : this.front));
 		}
 
 
@@ -161,41 +166,4 @@ public class BlockRiceCooker extends BlockContainer
 			worldObj.setTileEntity(xCoord, yCoord, zCoord, tileentity);
 		}
 	}
-
-
-	  /*public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float dx, float dy, float dz)
-	  {
-	    if (!world.isRemote) {
-	      player.openGui(FeliModServerMod.Instance, FeliModServerMod.GUI_ID, world, x, y, z);
-	    }
-	    return true;
-	  }
-
-	  public TileEntity createNewTileEntity(World world, int par2)
-	  {
-	    return new TileEntityRiceCooker();
-	  }
-
-	  public void breakBlock(World world, int x, int y, int z, Block block, int meta)
-	  {
-		  TileEntityRiceCooker tileEntity = (TileEntityRiceCooker)world.getTileEntity(x, y, z);
-		    if (tileEntity != null) {
-		      dropItem(tileEntity, world, x, y, z);
-		    }
-		    super.breakBlock(world, x, y, z, block, meta);
-	  }
-
-	  private void dropItem(IInventory iinventory, World world, int xCoord, int yCoord, int zCoord)
-	  {
-	    for (int slotIndex = 0; slotIndex < iinventory.getSizeInventory(); slotIndex++)
-	    {
-	      ItemStack itemStack = iinventory.getStackInSlot(slotIndex);
-	      if (itemStack != null)
-	      {
-	        EntityItem entityitem = new EntityItem(world, xCoord, yCoord, zCoord, itemStack);
-
-	        world.equals(entityitem);
-	      }
-	    }
-	  }*/
 }

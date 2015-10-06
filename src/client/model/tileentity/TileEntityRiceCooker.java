@@ -16,6 +16,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import common.block.BlockRiceCooker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -84,18 +85,6 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 		par1.setTag("Items", nbttaglist);
 
 	}
-
-//	@Override
-//	public Packet getDescriptionPacket() {
-//        NBTTagCompound nbtTagCompound = new NBTTagCompound();
-//        this.writeToNBT(nbtTagCompound);
-//        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTagCompound);
-//	}
-//
-//	@Override
-//    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-//        this.readFromNBT(pkt.data);
-//    }
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int par1)
@@ -170,12 +159,13 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
 			if (flag != this.burnTime > 0)
 			{
 				flag1 = true;
+				BlockRiceCooker.updateRiceCookerState(this.burnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 			}
 		}
 
 		if (flag1)
 		{
-			this.onInventoryChanged();
+			this.markDirty();
 		}
 	}
 
@@ -238,20 +228,9 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory
             {
                 Block block = Block.getBlockFromItem(item);
 
-                if (block == Blocks.wooden_slab)
-                {
-                    return 150;
-                }
-
-                if (block.getMaterial() == Material.wood)
-                {
-                    return 300;
-                }
-
-                if (block == Blocks.coal_block)
-                {
-                    return 16000;
-                }
+                if (block == Blocks.wooden_slab)		 return 150;
+                if (block.getMaterial() == Material.wood)return 300;
+                if (block == Blocks.coal_block)			 return 16000;
             }
 
             if (item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) return 200;
