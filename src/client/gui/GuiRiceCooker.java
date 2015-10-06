@@ -13,22 +13,23 @@ public class GuiRiceCooker extends GuiContainer{
 
 	public static final ResourceLocation bground = new ResourceLocation("felimodserver", "textures/gui/ricefurnace.png");
 
-	public TileEntityRiceCooker ricecooker;
+	public TileEntityRiceCooker tileentity;
 
 	public GuiRiceCooker(InventoryPlayer inventoryplayer, TileEntityRiceCooker entity){
 		super(new ContainerRiceCooker(inventoryplayer, entity));
 
-		this.ricecooker=entity;
+		this.tileentity=entity;
 
 		this.xSize = 176;
 		this.ySize = 166;
 	}
 
 	public void drawGuiContainerBackgroundLayer(int per1,int per2){
-		String name = this.ricecooker.hasCustomInventoryName() ? this.ricecooker.getInventoryName() : I18n.format(this.ricecooker.getInventoryName(), new Object[0]);
+		String name = this.tileentity.hasCustomInventoryName() ? this.tileentity.getInventoryName() : I18n.format(this.tileentity.getInventoryName(), new Object[0]);
 
 		this.fontRendererObj.drawString(name, this.xSize/2-this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+
 	}
 
 	@Override
@@ -40,6 +41,14 @@ public class GuiRiceCooker extends GuiContainer{
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
+        if (this.tileentity.isBurning())
+        {
+            int i1 = this.tileentity.getBurnTimeRemainingScaled(13);
+            this.drawTexturedModalRect(x + 17, y + 37 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
+
+            i1 = this.tileentity.getCookProgressScaled(24);
+            this.drawTexturedModalRect(x + 79, y + 34, 176, 14, i1 + 1, 16);
+        }
 	}
 
 	@Override
