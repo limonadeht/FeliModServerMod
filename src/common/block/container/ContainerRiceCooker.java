@@ -26,9 +26,9 @@ public class ContainerRiceCooker extends Container{
 	public ContainerRiceCooker(InventoryPlayer inventory,TileEntityRiceCooker tileentity){
 		this.tileentity = tileentity;
 
-		this.addSlotToContainer(new Slot(this.tileentity,0, 17,17));
-		this.addSlotToContainer(new Slot(this.tileentity,1, 17,53));
-		this.addSlotToContainer(new SlotFurnace(inventory.player,this.tileentity ,2, 116,34));
+		this.addSlotToContainer(new Slot(this.tileentity,0, 86,16));
+		this.addSlotToContainer(new Slot(this.tileentity,1, 86,56));
+		this.addSlotToContainer(new SlotFurnace(inventory.player,this.tileentity ,2, 145,35));
 		int i;
 
 		for(i = 0;i < 3;i++){

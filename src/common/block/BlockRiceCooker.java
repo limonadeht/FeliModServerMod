@@ -119,7 +119,7 @@ public class BlockRiceCooker extends BlockContainer
 
 		if (tileentity != null)
         {
-    		FluidStack fluid = tileentity.productTank.getFluid();
+    		FluidStack fluid = tileentity.waterTank.getFluid();
 
         	if (itemstack == null)
         	{
@@ -185,11 +185,12 @@ public class BlockRiceCooker extends BlockContainer
         	        		world.markBlockForUpdate(x, y, z);
         	        		world.playSoundAtEntity(player, "random.pop", 0.4F, 1.8F);
         				}
-
-    	        		        return true;
+        				player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
+        				return true;
         			}
         			else
         			{
+        				player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
         				return true;
         			}
         		}
