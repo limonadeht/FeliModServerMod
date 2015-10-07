@@ -356,7 +356,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	@Override
 	public String getInventoryName() {
-		return "RiceCooker";
+		 return this.hasCustomInventoryName() ? this.ricecooker : "Rice Cooker";
 	}
 
 	public boolean hasCustomInventoryName()
