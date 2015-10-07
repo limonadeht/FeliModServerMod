@@ -17,6 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemSpade;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class FeliModServerModItems
@@ -35,6 +36,12 @@ public class FeliModServerModItems
 	public static Item itemEnderCannon;
 	public static Item ItemStarCannon;
 	public static Item FelModiItemBucket;
+
+	public static Item ItemFooderPickaxe;
+	public static Item ItemFooderShovel;
+	public static Item ItemFooderAxe;
+	public static Item ItemFooderSword;
+	public static Item ItemFooderToolMaster;
 
 	public static Item itemFooderArmorHelmet;
 	public static Item itemFooderArmorChestPlate;
@@ -80,6 +87,29 @@ public class FeliModServerModItems
 		itemEnderCannon = new ItemEnderCannon().setCreativeTab(FeliModServerMod.tabFeliModServerMod).setUnlocalizedName("enderCannon");
 		GameRegistry.registerItem(itemEnderCannon, "Ender Canonn");
 
+		Item.ToolMaterial fooderTool = EnumHelper.addToolMaterial("fooderTool", 3, -1, 500.0F, 998.0F, 10);
+
+		ItemFooderPickaxe = new ItemFooderPickaxe(fooderTool).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setTextureName("felimodserver:fooder_pickaxe")
+				.setUnlocalizedName("felimodserver:fooder_pickaxe");
+		GameRegistry.registerItem(ItemFooderPickaxe, "Fooder's Tool [Pickaxe]");
+
+		ItemFooderShovel = new ItemSpade(fooderTool).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setTextureName("felimodserver:fooder_shovel")
+				.setUnlocalizedName("felimodserver:fooder_shovel");
+		GameRegistry.registerItem(ItemFooderShovel, "Fooder's Tool [Shovel]");
+
+		ItemFooderAxe = new ItemFooderAxe(fooderTool).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setTextureName("felimodserver:fooder_axe")
+				.setUnlocalizedName("felimodserver:fooder_axe");
+		GameRegistry.registerItem(ItemFooderAxe, "Fooder's Tool [Axe]");
+
+		ItemFooderToolMaster = new ItemFooderToolMaster(fooderTool).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
+				.setTextureName("felimodserver:fooder_tool_master")
+				.setUnlocalizedName("felimodserver:fooder_tool_master");
+		GameRegistry.registerItem(ItemFooderToolMaster, "Fooder's Tool [Master]");
+
+
 		//装填数，射程距離(弓の最大1.0F)，攻撃力補正，攻撃後のWAIT，リロード後のWAIT，効果音，ノックバックの有無，炎上効果の有無
 		ItemStarCannon = new ItemStarCannon(6, 1.0F, 2.0D, 10, 30, "Star Cannon" ,false ,false)
 				.setCreativeTab(FeliModServerMod.tabFeliModServerMod)
@@ -93,7 +123,7 @@ public class FeliModServerModItems
 			    .setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 
 
-		IItemArmor.ArmorMaterial itemArmor = EnumHelper.addArmorMaterial("FeliModServerItemArmor", 50, new int[]{5,10,8,5}, 5);
+		IItemArmor.ArmorMaterial itemArmor = EnumHelper.addArmorMaterial("FeliModServerItemArmor", -1, new int[]{500,500,500,500}, 5);
 		itemArmor.customCraftingMaterial = FeliModServerModItems.itemSaba;
 
 		itemFooderArmorHelmet = new ItemArmor(itemArmor, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)

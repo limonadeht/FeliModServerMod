@@ -1,0 +1,27 @@
+#Mod Lang
+//BLOCK
+tile.Rice Cooker.name=Rice Cooker
+tile.Food CraftTable.name=Food CraftTable
+tile.Bento.name=Bentou
+
+tile.Rice.name=CropRice
+
+//ITEM
+item.bento_sample.name=SampleItem
+item.Yakinikudonburi.name=Yakiniku Donburi
+item.felimodserver:sabakan_food.name=Sabakan
+item.felimodserver:limone_food.name=Limone Food
+
+item.fooder_armor_helmet.name=Fooder's Armor [Helmet]
+item.fooder_armor_chestplate.name=Fooder's Armor [ChestPlate]
+item.fooder_armor_leggings.name=Fooder's Armor [Leggings]
+item.fooder_armor_boots.name=Fooder's Armor [Boots]
+
+item.enderCannon.name=Ender Cannon
+item.felimodserver:itemdebug.name=DebuggerItem
+
+item.felimodserver:itemRiceSeed.name=Rice Seed
+
+item.null.name=null
+
+//OTHER

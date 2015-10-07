@@ -143,12 +143,12 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
 	/*レシピ画面に表示される名前です。*/
 	@Override
 	public String getRecipeName() {
-		return "This is Dummy Recipe for Tutorial.";
+		return "Rice Cooker";
 	}
 
 	/*レシピ画面に使われる背景画像の場所です。*/
 	@Override
 	public String getGuiTexture() {
-		return "tutorial:textures/gui/dummygui.png";
+		return "textures/gui/ricefurnace.png";
 	}
 }
