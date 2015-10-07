@@ -15,6 +15,9 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
@@ -39,6 +42,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 	public ItemStack[] itemstacks = new ItemStack[3];
 
 	public FluidTankUtils waterTank = new FluidTankUtils(4000);
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1)
@@ -99,6 +103,18 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	}
 
+	@Override
+	public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        this.writeToNBT(nbtTagCompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTagCompound);
+	}
+
+	@Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.func_148857_g());
+    }
+
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int par1)
 	{
@@ -129,6 +145,8 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 		if (this.burnTime > 0)
 		{
 			--this.burnTime;
+
+			this.waterTank.setAmount(this.waterTank.getFluidAmount() - 1);
 		}
 
 		if (!this.worldObj.isRemote)
@@ -152,6 +170,9 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 					}
 				}
 			}
+			if(flag != this.waterTank.getFluidAmount() > 0){
+				flag1 = true;
+			}
 
 			if (this.isBurning() && this.canSmelt())
 			{
@@ -159,6 +180,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 				if (this.cookTime == 200)
 				{
+
 					this.cookTime = 0;
 					this.smeltItem();
 					flag1 = true;
@@ -184,7 +206,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	private boolean canSmelt()
 	{
-		if (this.itemstacks[0] == null)
+		if (this.itemstacks[0] == null || this.waterTank.getFluidAmount() < 0)
 		{
 			return false;
 		}

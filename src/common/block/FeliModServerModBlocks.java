@@ -30,7 +30,7 @@ public class FeliModServerModBlocks
 		BlockRiceCookerIdle = new BlockRiceCooker(false).setBlockName("Rice Cooker").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerBlock(BlockRiceCookerIdle, "RiceCookerIdle");
 
-		BlockRiceCookerActive = new BlockRiceCooker(true).setBlockName("Rice Cooker Active").setLightLevel(0.624F);
+		BlockRiceCookerActive = new BlockRiceCooker(true).setBlockName("Rice Cooker Active").setLightLevel(1.0F);
 		GameRegistry.registerBlock(BlockRiceCookerActive, "RiceCookerActive");
 
 		BlockRice = new BlockRice().setBlockName("Rice").setCreativeTab(FeliModServerMod.tabFeliModServerMod);

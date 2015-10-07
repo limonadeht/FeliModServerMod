@@ -29,9 +29,9 @@ public class GuiRiceCooker extends GuiContainer{
 
 	public void drawGuiContainerBackgroundLayer(int per1,int per2){
 
-
-	        this.fontRendererObj.drawString("Rice Cooker",9, 6, 4210752);
-	        this.fontRendererObj.drawString(I18n.format("inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		String s = this.tileentity.hasCustomInventoryName() ? this.tileentity.getInventoryName() : I18n.format(this.tileentity.getInventoryName(), new Object[0]);
+        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+	    this.fontRendererObj.drawString(I18n.format("inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 
 	}
 
@@ -43,8 +43,6 @@ public class GuiRiceCooker extends GuiContainer{
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
-        this.fontRendererObj.drawString("Rice Cooker",x + 110, y + 4, 4210752);
 
         if (this.tileentity.isBurning())
         {
