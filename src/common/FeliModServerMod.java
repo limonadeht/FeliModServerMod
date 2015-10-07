@@ -2,6 +2,8 @@ package common;
 
 import client.model.tileentity.TileEntityRiceCooker;
 import common.block.FeliModServerModBlocks;
+import common.entity.FeliModServerModMobs;
+import common.fluid.FeliModServerModFluids;
 import common.item.FeliModServerModItems;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -10,11 +12,14 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import handler.BucketHandler;
 import handler.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import recipe.Craftingrecipe;
 import recipe.RiceCookerRecipes;
+import recipe.neiNewRecipeRegister;
 import server.ServerProxy;
 
 /**
@@ -50,7 +55,6 @@ public class FeliModServerMod
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
-
 	}
 
 	@EventHandler
@@ -58,15 +62,26 @@ public class FeliModServerMod
     {
 		FeliModServerModItems.registerFeliModServerItems();
 		FeliModServerModBlocks.registerFeliModServerModBlocks();
+		FeliModServerModMobs.registerFeliModServerModMobs();
 		Craftingrecipe.registerFeliModServerModCraftingRecipes();
 		RiceCookerRecipes.registerFeliModServerModRiceCookerRecipes();
 
+		BucketHandler.INSTANCE.buckets.put(FeliModServerModFluids.FluidBlockLimone, FeliModServerModItems.FelModiItemBucket);
+		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+
+		serverproxy.registerRenderers();
 		serverproxy.registerRenderThings();
 		serverproxy.registerTileEntitySpecialRenderer();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(FeliModServerMod.Instance, new GuiHandler());
 
 		GameRegistry.registerTileEntity(TileEntityRiceCooker.class, "BlockRiceCooker");
+
+		(new neiNewRecipeRegister()).setRecipeList();
+
+		/*NEIへの登録は、プロキシクラスを利用することでクライアントサイドのみで行います。*/
+
+		serverproxy.LoadNEI();
 
 
 		//アイテムを3D描画する

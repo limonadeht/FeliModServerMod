@@ -49,7 +49,7 @@ public class itemYakinikudonburi_mk5 extends Item
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
 		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
-        
+
 			list.add(EnumChatFormatting.DARK_GREEN + "Compressed: 64");
         	list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
         	list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
@@ -68,6 +68,11 @@ public class itemYakinikudonburi_mk5 extends Item
 			list.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
 		}
     }
+
+	public boolean hasEffect(ItemStack par1ItemStack)
+	{
+		return true;
+	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
 		if(par7 != 1){

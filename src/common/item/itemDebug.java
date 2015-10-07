@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
@@ -18,6 +17,7 @@ public class itemDebug extends Item
 	{
 		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		this.setUnlocalizedName("felimodserver:itemdebug");
+		this.setTextureName("felimodserver:debug_item");
 	}
 
 	@Override
@@ -33,10 +33,10 @@ public class itemDebug extends Item
 		if(i <= 1000)
 		{
 			world.setWorldTime(world.getWorldTime() + 100);
-			entityplayer.addChatComponentMessage(new ChatComponentText("Gooooooooooooooooooo!"));
+			//entityplayer.addChatComponentMessage(new ChatComponentText("Mode Ghanged: " + EnumChatFormatting.RED + "Enabled"));
 		}else{
 			world.setWorldTime(world.getWorldTime() + 200);
-			entityplayer.addChatComponentMessage(new ChatComponentText("Gooooooooooooooooooo!"));
+			//entityplayer.addChatComponentMessage(new ChatComponentText("Mode Changed: " + EnumChatFormatting.RED + "Disabled"));
 		}
 		}
 		return super.onItemRightClick(itemstack, world, entityplayer);

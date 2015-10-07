@@ -33,7 +33,7 @@ public class itemSabakanFood extends Item
 	{
 		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		this.setMaxDamage(3);
-		this.setUnlocalizedName("felimodserver:limone_food");
+		this.setUnlocalizedName("felimodserver:sabakan_food");
 		this.saturationModifier = par2;
 		this.itemUseDuration = 3;
 		this.healAmount = 30;

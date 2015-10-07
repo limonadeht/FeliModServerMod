@@ -1,13 +1,8 @@
 package common.food;
 
 import common.FeliModServerMod;
-import common.block.FeliModServerModBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemSeeds;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class FeliModServerModItems
 {
@@ -16,17 +11,6 @@ public class FeliModServerModItems
 	public static Item itemSabakanFood;
 	public static Item itemSaba;
 	public static Item itemDebug;
-	public static Item itemYakinikudonburi;
-	public static Item itemYakinikudonburi_mk2;
-	public static Item itemYakinikudonburi_mk3;
-	public static Item itemYakinikudonburi_mk4;
-	public static Item itemYakinikudonburi_mk5;
-	public static Item itemRiceSeed;
-
-	public static Item itemFooderArmorHelmet;
-	public static Item itemFooderArmorChestPlate;
-	public static Item itemFooderArmorLeggings;
-	public static Item itemFooderArmorBoots;
 
 	public static void registerFeliModServerItems()
 	{
@@ -44,43 +28,5 @@ public class FeliModServerModItems
 
 		itemDebug = new itemDebug().setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemDebug, "Debugger Item");
-
-		itemYakinikudonburi = new itemYakinikudonburi(403, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemYakinikudonburi, "Yakinikudonburi");
-
-		itemYakinikudonburi_mk2 = new itemYakinikudonburi_mk2(404, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemYakinikudonburi_mk2, "Yakinikudonburi Mk2");
-
-		itemYakinikudonburi_mk3 = new itemYakinikudonburi_mk3(405, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemYakinikudonburi_mk3, "Yakinikudonburi Mk3");
-
-		itemYakinikudonburi_mk4 = new itemYakinikudonburi_mk4(406, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemYakinikudonburi_mk4, "Yakinikudonburi Mk4");
-
-		itemYakinikudonburi_mk5 = new itemYakinikudonburi_mk5(407, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemYakinikudonburi_mk5, "Yakinikudonburi Mk5");
-
-		itemRiceSeed = new ItemSeeds(FeliModServerModBlocks.BlockRice, Blocks.farmland).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
-		GameRegistry.registerItem(itemRiceSeed, "Rice Seed");
-
-
-		IItemArmor.ArmorMaterial itemArmor = EnumHelper.addArmorMaterial("FeliModServerItemArmor", 50, new int[]{5,10,8,5}, 5);
-		itemArmor.customCraftingMaterial = FeliModServerModItems.itemSaba;
-
-		itemFooderArmorHelmet = new ItemArmor(itemArmor, 0, 0).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
-				.setUnlocalizedName("fooder_armor_helmet");
-		GameRegistry.registerItem(itemFooderArmorHelmet, "fooder_armor_helmet");
-
-		itemFooderArmorChestPlate = new ItemArmor(itemArmor, 0, 1).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
-				.setUnlocalizedName("fooder_armor_chestplate");
-		GameRegistry.registerItem(itemFooderArmorChestPlate, "fooder_armor_chestplate");
-
-		itemFooderArmorLeggings = new ItemArmor(itemArmor, 0, 2).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
-				.setUnlocalizedName("fooder_armor_leggings");
-		GameRegistry.registerItem(itemFooderArmorLeggings, "fooder_armor_leggings");
-
-		itemFooderArmorBoots = new ItemArmor(itemArmor, 0, 3).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
-				.setUnlocalizedName("fooder_armor_boots");
-		GameRegistry.registerItem(itemFooderArmorBoots, "fooder_armor_boots");
 	}
 }

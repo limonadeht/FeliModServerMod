@@ -41,6 +41,12 @@ public class BlockRice extends BlockCrops
         return FeliModServerModItems.itemRiceSeed;
     }
 
+    //収穫できるアイテム
+    protected Item func_149865_P()
+    {
+        return FeliModServerModItems.itemRiceSeed;
+    }
+
     //ブロックのテクスチャ
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister)

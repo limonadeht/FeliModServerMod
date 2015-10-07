@@ -8,15 +8,20 @@ public class ServerProxy
 {
 	public void registerRenderThings()
 	{
-
+	}
+	
+	public void registerRenderers()
+	{
 	}
 
 	public void registerTileEntitySpecialRenderer()
 	{
 		GameRegistry.registerTileEntity(TileEntityBento.class, FeliModServerMod.MOD_ID + ":TileBento");
 	}
-	
+
 	public boolean isShiftKeyDown() {
 		return false;
 	}
+
+	public void LoadNEI() {}
 }

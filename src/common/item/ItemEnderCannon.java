@@ -19,7 +19,7 @@ public class ItemEnderCannon extends Item
 
 	public ItemEnderCannon()
 	{
-		int durability = 1540;
+		int durability = 256;
 		this.setMaxStackSize(256);
 		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		this.setMaxDamage(durability);

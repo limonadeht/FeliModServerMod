@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 public class FeliModServerModBlocks
 {
 	public static Block BlockBento;
+	public static Block BlockWhitedStone;
 
 	public static Block BlockFoodCraftTable;
 
