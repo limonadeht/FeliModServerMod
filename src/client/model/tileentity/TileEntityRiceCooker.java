@@ -170,7 +170,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 					}
 				}
 			}
-			if(flag != this.waterTank.getFluidAmount() > 0){
+			if(flag != this.waterTank.getFluidAmount() < 0){
 				flag1 = true;
 			}
 
@@ -206,7 +206,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	private boolean canSmelt()
 	{
-		if (this.itemstacks[0] == null || this.waterTank.getFluidAmount() < 0)
+		if (this.itemstacks[0] == null || this.waterTank.getFluidAmount() <= 0)
 		{
 			return false;
 		}
