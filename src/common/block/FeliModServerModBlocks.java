@@ -33,7 +33,7 @@ public class FeliModServerModBlocks
 		BlockRiceCookerActive = new BlockRiceCooker(true).setBlockName("Rice Cooker Active").setLightLevel(1.0F);
 		GameRegistry.registerBlock(BlockRiceCookerActive, "RiceCookerActive");
 
-		BlockRice = new BlockRice().setBlockName("Rice").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		BlockRice = new BlockRice().setBlockName("Rice").setBlockTextureName("felimodserver/texture/plants");
 		GameRegistry.registerBlock(BlockRice, "Rice");
 	}
 }
