@@ -60,8 +60,9 @@ public class FeliModServerMod
 	@EventHandler
     public void Init(FMLInitializationEvent e)
     {
-		FeliModServerModItems.registerFeliModServerItems();
 		FeliModServerModBlocks.registerFeliModServerModBlocks();
+		FeliModServerModItems.registerFeliModServerItems();
+
 		FeliModServerModMobs.registerFeliModServerModMobs();
 		Craftingrecipe.registerFeliModServerModCraftingRecipes();
 		RiceCookerRecipes.registerFeliModServerModRiceCookerRecipes();

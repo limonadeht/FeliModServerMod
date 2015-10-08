@@ -8,7 +8,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 public class GuiRiceCooker extends GuiContainer{
 
@@ -21,15 +20,17 @@ public class GuiRiceCooker extends GuiContainer{
 
 		this.tileentity=entity;
 
+
+
 		this.xSize = 176;
 		this.ySize = 166;
 	}
 
 	public void drawGuiContainerBackgroundLayer(int per1,int per2){
 
-		 	String s = this.tileentity.hasCustomInventoryName() ? this.tileentity.getInventoryName() : I18n.format(this.tileentity.getInventoryName(), new Object[0]);
-	        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-	        this.fontRendererObj.drawString(I18n.format("inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		String s = this.tileentity.hasCustomInventoryName() ? this.tileentity.getInventoryName() : I18n.format(this.tileentity.getInventoryName(), new Object[0]);
+        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+	    this.fontRendererObj.drawString(I18n.format("inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 
 	}
 
@@ -44,12 +45,17 @@ public class GuiRiceCooker extends GuiContainer{
 
         if (this.tileentity.isBurning())
         {
-            int i1 = this.tileentity.getBurnTimeRemainingScaled(13);
-            this.drawTexturedModalRect(x + 17, y + 37 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
+            int i1 = this.tileentity.getBurnTimeRemainingScaled(69);
+            this.drawTexturedModalRect(x + 6, y + 62 + 12 - i1, 178, 69 - i1, 17, i1 + 1);
 
-            i1 = this.tileentity.getCookProgressScaled(24);
-            this.drawTexturedModalRect(x + 79, y + 34, 176, 14, i1 + 1, 16);
+            int i2 = this.tileentity.getCookProgressScaled(82);
+            this.drawTexturedModalRect(x + 53, y + 35, 0, 167, i2 + 1, 16);
         }
+
+        int i3 = 69 - ((this.tileentity.waterTank.getCapacity() - this.tileentity.waterTank.getFluidAmount()) / 57);
+        this.drawTexturedModalRect(x + 34, y + 62 + 12 - i3, 178, 141 - i3, 17, i3 + 1);
+
+
 	}
 
 	@Override

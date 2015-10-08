@@ -17,22 +17,29 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemSpade;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class FeliModServerModItems
 {
 	public static Item itemFoodsample;
+
 	public static Item itemLimoneFood;
+
 	public static Item itemSabakanFood;
 	public static Item itemSaba;
+
 	public static Item itemDebug;
+
 	public static Item itemYakinikudonburi;
 	public static Item itemYakinikudonburi_mk2;
 	public static Item itemYakinikudonburi_mk3;
 	public static Item itemYakinikudonburi_mk4;
 	public static Item itemYakinikudonburi_mk5;
+
 	public static Item itemRiceSeed;
+
 	public static Item itemEnderCannon;
 	public static Item ItemStarCannon;
 	public static Item FelModiItemBucket;
@@ -80,8 +87,7 @@ public class FeliModServerModItems
 		itemYakinikudonburi_mk5 = new itemYakinikudonburi_mk5(407, 5, false).setCreativeTab(FeliModServerMod.tabFeliModServerMod);
 		GameRegistry.registerItem(itemYakinikudonburi_mk5, "Yakinikudonburi Mk5");
 
-		itemRiceSeed = new itemRiceSeed(FeliModServerModBlocks.BlockRice, Blocks.farmland).setCreativeTab(FeliModServerMod.tabFeliModServerMod)
-				.setUnlocalizedName("felimodserver:itemRiceSeed").setTextureName("felimodserver:seeds_rice");
+		itemRiceSeed = new ItemSeeds(FeliModServerModBlocks.BlockRice, Blocks.farmland).setCreativeTab(FeliModServerMod.tabFeliModServerMod).setUnlocalizedName("felimodserver:itemRiceSeed").setTextureName("felimodserver:seeds_rice");
 		GameRegistry.registerItem(itemRiceSeed, "Rice Seed");
 
 		itemEnderCannon = new ItemEnderCannon().setCreativeTab(FeliModServerMod.tabFeliModServerMod).setUnlocalizedName("enderCannon");

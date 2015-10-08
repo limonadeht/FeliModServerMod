@@ -15,12 +15,12 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
 import common.block.BlockRiceCooker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -41,7 +41,8 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	public ItemStack[] itemstacks = new ItemStack[3];
 
-	public FluidTankUtils productTank = new FluidTankUtils(1000);
+	public FluidTankUtils waterTank = new FluidTankUtils(4000);
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1)
@@ -61,6 +62,11 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 				this.itemstacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
+
+		 this.waterTank = new FluidTankUtils(4000);
+			if (par1.hasKey("waterTank")) {
+			    this.waterTank.readFromNBT(par1.getCompoundTag("waterTank"));
+			}
 
 		this.burnTime = par1.getShort("BurnTime");
 		this.cookTime = par1.getShort("CookTime");
@@ -89,9 +95,25 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 			}
 		}
 
+		NBTTagCompound tank = new NBTTagCompound();
+		this.waterTank.writeToNBT(tank);
+		par1.setTag("waterTank", tank);
+
 		par1.setTag("Items", nbttaglist);
 
 	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        this.writeToNBT(nbtTagCompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTagCompound);
+	}
+
+	@Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.func_148857_g());
+    }
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int par1)
@@ -123,6 +145,8 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 		if (this.burnTime > 0)
 		{
 			--this.burnTime;
+
+			this.waterTank.setAmount(this.waterTank.getFluidAmount() - 1);
 		}
 
 		if (!this.worldObj.isRemote)
@@ -146,6 +170,9 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 					}
 				}
 			}
+			if(flag != this.waterTank.getFluidAmount() < 0){
+				flag1 = true;
+			}
 
 			if (this.isBurning() && this.canSmelt())
 			{
@@ -153,6 +180,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 				if (this.cookTime == 200)
 				{
+
 					this.cookTime = 0;
 					this.smeltItem();
 					flag1 = true;
@@ -178,7 +206,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	private boolean canSmelt()
 	{
-		if (this.itemstacks[0] == null)
+		if (this.itemstacks[0] == null || this.waterTank.getFluidAmount() <= 0)
 		{
 			return false;
 		}
@@ -222,7 +250,7 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 		return getItemBurnTime(itemstack) > 0;
 	}
 
-	private static int getItemBurnTime(ItemStack itemstack) {
+	public static int getItemBurnTime(ItemStack itemstack) {
 		if (itemstack == null)
         {
             return 0;
@@ -381,47 +409,60 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	}
 
+	public int getFuel(ItemStack itemstack)
+	{
+		if(itemstack.getItem() == Items.lava_bucket)
+		{
+			return 1000;
+		}
 
-	//fluid
+		return getItemBurnTime(itemstack)/2;
+	}
+
+
+	//water
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource,
+			boolean doDrain) {
+		if (resource == null) {
+			return null;
+		}
+		if (waterTank.getFluidType() == resource.getFluid()) {
+			return waterTank.drain(resource.amount, doDrain);
+		}
+		return null;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return this.waterTank.drain(maxDrain, doDrain);
+	}
+
+	//
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		if (resource == null || resource.getFluid() == null){
 			return 0;
 		}
 
-		FluidStack current = this.productTank.getFluid();
+		FluidStack current = this.waterTank.getFluid();
 		FluidStack resourceCopy = resource.copy();
 		if (current != null && current.amount > 0 && !current.isFluidEqual(resourceCopy)){
 			return 0;
 		}
 
 		int i = 0;
-		int used = this.productTank.fill(resourceCopy, doFill);
+		int used = this.waterTank.fill(resourceCopy, doFill);
 		resourceCopy.amount -= used;
 		i += used;
 
 		return i;
 	}
 
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-			if (resource == null) {
-				return null;
-			}
-			if (productTank.getFluidType() == resource.getFluid()) {
-				return productTank.drain(resource.amount, doDrain);
-			}
-			return null;
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return this.productTank.drain(maxDrain, doDrain);
-	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid != null && this.productTank.isEmpty();
+		return fluid != null && this.waterTank.isEmpty();
 	}
 
 	@Override
@@ -431,7 +472,8 @@ public class TileEntityRiceCooker extends TileEntity implements ISidedInventory,
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[]{productTank.getInfo()};
+		return new FluidTankInfo[]{waterTank.getInfo()};
 	}
+
 
 }
