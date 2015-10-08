@@ -1,4 +1,7 @@
 #Mod Lang
+#カラーコード使えます。↓
+#http://minecraft.gamepedia.com/Formatting_codes
+
 //BLOCK
 tile.Rice Cooker.name=Rice Cooker
 tile.Food CraftTable.name=Food CraftTable
@@ -12,10 +15,15 @@ item.Yakinikudonburi.name=Yakiniku Donburi
 item.felimodserver:sabakan_food.name=Sabakan
 item.felimodserver:limone_food.name=Limone Food
 
-item.fooder_armor_helmet.name=Fooder's Armor [Helmet]
-item.fooder_armor_chestplate.name=Fooder's Armor [ChestPlate]
-item.fooder_armor_leggings.name=Fooder's Armor [Leggings]
-item.fooder_armor_boots.name=Fooder's Armor [Boots]
+item.felimodserver:fooder_pickaxe.name=§bFooder's Tool §f[§6Pickaxe§f]
+item.felimodserver:fooder_shovel.name=§bFooder's Tool §f[§6Shovel§f]
+item.felimodserver:fooder_axe.name=§bFooder's Tool §f[§6Axe§f]
+item.felimodserver:fooder_tool_master.name=§bFooder's Tool §f[§4Master§f]
+
+item.fooder_armor_helmet.name=§bFooder's Armor §f[§6Helmet§f]
+item.fooder_armor_chestplate.name=§bFooder's Armor §f[§6ChestPlate§f]
+item.fooder_armor_leggings.name=§bFooder's Armor §f[§6Leggings§f]
+item.fooder_armor_boots.name=§bFooder's Armor §f[§6Boots§f]
 
 item.enderCannon.name=Ender Cannon
 item.felimodserver:itemdebug.name=DebuggerItem
