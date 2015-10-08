@@ -37,6 +37,7 @@ public class FeliModServerModItems
 	public static Item itemYakinikudonburi_mk3;
 	public static Item itemYakinikudonburi_mk4;
 	public static Item itemYakinikudonburi_mk5;
+	public static Item itemRice;
 
 	public static Item itemRiceSeed;
 
@@ -89,6 +90,10 @@ public class FeliModServerModItems
 
 		itemRiceSeed = new ItemSeeds(FeliModServerModBlocks.BlockRice, Blocks.farmland).setCreativeTab(FeliModServerMod.tabFeliModServerMod).setUnlocalizedName("felimodserver:itemRiceSeed").setTextureName("felimodserver:seeds_rice");
 		GameRegistry.registerItem(itemRiceSeed, "Rice Seed");
+
+		itemRice = new ItemRice().setCreativeTab(FeliModServerMod.tabFeliModServerMod).setTextureName("felimodserver:item_rice")
+				.setUnlocalizedName("itemRice");
+		GameRegistry.registerItem(itemRice, "item_Rice");
 
 		itemEnderCannon = new ItemEnderCannon().setCreativeTab(FeliModServerMod.tabFeliModServerMod).setUnlocalizedName("enderCannon");
 		GameRegistry.registerItem(itemEnderCannon, "Ender Canonn");
