@@ -71,13 +71,13 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
 	/*登録用の文字列です*/
 	@Override
 	public String getOverlayIdentifier() {
-	  return "SampleRecipe";
+	  return "RiceCookerRecipe";
 	}
 
 	//ここで登録をした範囲内をGUIでクリックすると文字列のレシピ画面を表示します.
 	@Override
 	public void loadTransferRects() {
-	    transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(65, 25, 20, 20), "SampleRecipe"));
+	    transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(65, 25, 20, 20), "RiceCookerRecipe"));
 	}
 
 	/*以下のメソッドは、NEIのGUI画面上でアイコンをクリックしたり、
@@ -86,7 +86,7 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
     @Override
     public void loadCraftingRecipes(String outputId, Object... results)
     {
-        if(outputId.equals("SampleRecipe"))
+        if(outputId.equals("RiceCookerRecipe"))
         {
             HashMap<ItemStack, ItemStack> recipes = (HashMap<ItemStack, ItemStack>) this.recipeLoader();
 
@@ -149,6 +149,6 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
 	/*レシピ画面に使われる背景画像の場所です。*/
 	@Override
 	public String getGuiTexture() {
-		return "textures/gui/ricefurnace.png";
+		return "felimodserver:textures/gui/ricefurnace.png";
 	}
 }

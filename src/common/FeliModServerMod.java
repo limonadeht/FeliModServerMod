@@ -1,5 +1,6 @@
 package common;
 
+import client.model.render.ItemTvRenderer;
 import client.model.tileentity.TileEntityRiceCooker;
 import common.block.FeliModServerModBlocks;
 import common.entity.FeliModServerModMobs;
@@ -16,6 +17,7 @@ import handler.BucketHandler;
 import handler.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import recipe.Craftingrecipe;
 import recipe.RiceCookerRecipes;
@@ -80,14 +82,14 @@ public class FeliModServerMod
 
 		(new neiNewRecipeRegister()).setRecipeList();
 
-		/*NEIへの登録は、プロキシクラスを利用することでクライアントサイドのみで行います。*/
-
+		/*NEIへの登録は、プロキシクラスを利用することでクライアントサイドのみで行う*/
 		serverproxy.LoadNEI();
 
 
 		//アイテムを3D描画する
-		//わけわからないのでいったん見送ります。
+		//わけわからないのでいったん見送り
 		//MinecraftForgeClient.registerItemRenderer(FeliModServerModItems.itemFoodsample, (IItemRenderer)new ItemRenderBento());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FeliModServerModBlocks.BlockTV), ItemTvRenderer.instance);
     }
 
 	public static CreativeTabs tabFeliModServerMod

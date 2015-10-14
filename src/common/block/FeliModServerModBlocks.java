@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 public class FeliModServerModBlocks
 {
 	public static Block BlockBento;
-	public static Block BlockWhitedStone;
+	public static Block BlockTV;
 
 	public static Block BlockFoodCraftTable;
 
@@ -35,5 +35,8 @@ public class FeliModServerModBlocks
 
 		BlockRice = new BlockRice().setBlockName("Rice").setBlockTextureName("felimodserver/texture/plants");
 		GameRegistry.registerBlock(BlockRice, "Rice");
+
+		BlockTV = new BlockTv(Material.iron).setBlockName("TV").setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		GameRegistry.registerBlock(BlockTV, "TV");
 	}
 }

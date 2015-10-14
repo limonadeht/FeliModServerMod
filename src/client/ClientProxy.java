@@ -2,7 +2,9 @@ package client;
 
 import org.lwjgl.input.Keyboard;
 
+import client.model.render.RenderTv;
 import client.model.tileentity.TileEntityBento;
+import client.model.tileentity.TileEntityTv;
 import common.entity.EntityStarCannonBullet;
 import common.model.render.RenderBento;
 import common.model.render.RenderStarCannon;
@@ -34,6 +36,10 @@ public class ClientProxy extends ServerProxy
 	public void registerRenderers() {
 		//エンティティとレンダーの紐付け
 		RenderingRegistry.registerEntityRenderingHandler(EntityStarCannonBullet.class, new RenderStarCannon());
+
+		//TV
+		TileEntitySpecialRenderer render = new RenderTv();
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTv.class, render);
 	}
 
 	/*NEIのロードの確認を行い、登録のメソッドを呼び出す*/
