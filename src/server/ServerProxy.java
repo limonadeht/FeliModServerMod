@@ -1,7 +1,7 @@
 package server;
 
 import client.model.tileentity.TileEntityBento;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ServerProxy
@@ -16,7 +16,7 @@ public class ServerProxy
 
 	public void registerTileEntitySpecialRenderer()
 	{
-		GameRegistry.registerTileEntity(TileEntityBento.class, FeliModServerMod.MOD_ID + ":TileBento");
+		GameRegistry.registerTileEntity(TileEntityBento.class, ILHsJapaneseFood.MOD_ID + ":TileBento");
 	}
 
 	public boolean isShiftKeyDown() {

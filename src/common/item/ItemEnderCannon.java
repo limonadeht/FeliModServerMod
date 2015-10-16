@@ -2,7 +2,7 @@ package common.item;
 
 import java.util.List;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import common.entity.EntityEnderCannon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +21,7 @@ public class ItemEnderCannon extends Item
 	{
 		int durability = 256;
 		this.setMaxStackSize(256);
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setMaxDamage(durability);
 		this.setTextureName("felimodserver:ender_cannon");
 	}
@@ -30,7 +30,7 @@ public class ItemEnderCannon extends Item
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown()) {
 			list.add("This EnderCanonn is using EnderPearl");
 			list.add("Pleace Charged EnderPearl.");
 			list.add(EnumChatFormatting.DARK_GRAY + "Durability: " + itemStack.getItemDamage() + "/" + this.getMaxDamage());

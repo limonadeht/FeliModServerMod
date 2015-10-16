@@ -1,6 +1,6 @@
 package common.entity;
 
-import common.item.FeliModServerModItems;
+import common.Register;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -44,5 +44,5 @@ public class EntityLychever extends EntityLiving
     public EnumCreatureAttribute getCreatureAttribute() { return EnumCreatureAttribute.UNDEFINED; }
 
     @Override
-    public Item getDropItem() { return FeliModServerModItems.itemSaba; }
+    public Item getDropItem() { return Register.itemSaba; }
 }

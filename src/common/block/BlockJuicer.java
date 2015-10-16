@@ -1,7 +1,7 @@
 package common.block;
 
 import client.model.tileentity.TileJuicer;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -22,7 +22,7 @@ public class BlockJuicer extends BlockContainer
 	public BlockJuicer()
 	{
 		super(Material.iron);
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setHardness(5.0F);
 	}
 

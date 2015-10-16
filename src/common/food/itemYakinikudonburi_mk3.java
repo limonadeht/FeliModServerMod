@@ -2,8 +2,8 @@ package common.food;
 
 import java.util.List;
 
-import common.FeliModServerMod;
-import common.block.FeliModServerModBlocks;
+import common.ILHsJapaneseFood;
+import common.Register;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,7 +32,7 @@ public class itemYakinikudonburi_mk3 extends Item
 
 	public itemYakinikudonburi_mk3(float par1, float par2, boolean par3)
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setUnlocalizedName("Yakinikudonburi");
 		this.itemUseDuration = 3;
 		this.healAmount = 1;
@@ -48,7 +48,7 @@ public class itemYakinikudonburi_mk3 extends Item
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown()) {
 	        list.add(EnumChatFormatting.DARK_GREEN + "Compressed: 16");
 	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
 	        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);
@@ -74,8 +74,8 @@ public class itemYakinikudonburi_mk3 extends Item
 			return false;
 		}else{
 			if(player.canPlayerEdit(x, y + 1, z, par7, stack) && player.canPlayerEdit(x, y + 2, z, par7, stack)){
-				world.setBlock(x, y + 1, z, FeliModServerModBlocks.BlockBento);
-				world.notifyBlockOfNeighborChange(x, y + 1, z, FeliModServerModBlocks.BlockBento);
+				world.setBlock(x, y + 1, z, Register.BlockBento);
+				world.notifyBlockOfNeighborChange(x, y + 1, z, Register.BlockBento);
 				--stack.stackSize;
 				return true;
 			}else{

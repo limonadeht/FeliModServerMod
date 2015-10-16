@@ -1,13 +1,13 @@
 package common.food;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import net.minecraft.item.Item;
 
 public class itemSaba extends Item
 {
 	public itemSaba()
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setTextureName("felimodserver:saba");
 	}
 }

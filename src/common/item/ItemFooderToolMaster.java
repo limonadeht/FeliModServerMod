@@ -6,7 +6,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import client.model.tileentity.TileEntityRiceCooker;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -35,7 +35,7 @@ public class ItemFooderToolMaster extends ItemTool {
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown()) {
 			list.add("Durability: Infinite");
 		}else{
 			EnumChatFormatting It = EnumChatFormatting.ITALIC;
@@ -62,6 +62,7 @@ public class ItemFooderToolMaster extends ItemTool {
 		{
 			System.out.println("removed");
 			world.setBlock(x, y, z, Blocks.air);
+		}else{
 		}
 		return super.onItemUse(itemstack, entityplayer, world, x, y, z, par7, par8, par9, par10);
 	}

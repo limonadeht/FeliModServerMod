@@ -3,8 +3,8 @@ package common.block;
 import java.util.Random;
 
 import client.model.tileentity.TileEntityBento;
-import common.FeliModServerMod;
-import common.item.FeliModServerModItems;
+import common.ILHsJapaneseFood;
+import common.Register;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,12 +21,12 @@ public class BlockBento extends BlockContainer
 	public BlockBento(Material material) {
 		super(material);
 		this.setBlockName("Bento");
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 	}
 
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return FeliModServerModItems.itemFoodsample;
+        return Register.itemFoodsample;
     }
 
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
@@ -62,7 +62,7 @@ public class BlockBento extends BlockContainer
 
 		if(itemstack == null)
 		{
-			par5EntityPlayer.dropItem(FeliModServerModItems.itemFoodsample, 1);
+			par5EntityPlayer.dropItem(Register.itemFoodsample, 1);
 			par1World.getBlock(par2, par3, par4);
 		}
 		return true;

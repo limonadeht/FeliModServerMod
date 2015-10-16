@@ -1,6 +1,6 @@
 package handler;
 
-import common.item.FeliModServerModItems;
+import common.Register;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,9 +13,9 @@ public class CraftingHandler{
 			if (craftMatrix.getStackInSlot(i) != null) // If there is an item
 			{
 				ItemStack j = craftMatrix.getStackInSlot(i); // Gets the item
-				if (j.getItem() != null && j.getItem() == FeliModServerModItems.ItemFoodCrystal)
+				if (j.getItem() != null && j.getItem() == Register.ItemFoodCrystal)
 				{
-					ItemStack k = new ItemStack(FeliModServerModItems.ItemFoodCrystal, 2, (j.getItemDamage() + 1));
+					ItemStack k = new ItemStack(Register.ItemFoodCrystal, 2, (j.getItemDamage() + 1));
 					if (k.getItemDamage() >= k.getMaxDamage()) {
 						k.stackSize--;
 					}

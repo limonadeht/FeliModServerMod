@@ -2,7 +2,7 @@ package recipe;
 
 import java.util.HashMap;
 
-import common.item.FeliModServerModItems;
+import common.Register;
 import net.minecraft.item.ItemStack;
 
 public class neiNewRecipeRegister {
@@ -12,7 +12,7 @@ public class neiNewRecipeRegister {
 	/*架空のレシピを登録*/
 	public void setRecipeList()
 	{
-		newRecipeList.put(new ItemStack(FeliModServerModItems.itemSaba, 1, 0), new ItemStack(FeliModServerModItems.itemSaba, 1, 0));
+		newRecipeList.put(new ItemStack(Register.itemSaba, 1, 0), new ItemStack(Register.itemSaba, 1, 0));
 	}
 
 }

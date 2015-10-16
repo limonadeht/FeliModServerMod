@@ -1,7 +1,7 @@
 package common.block;
 
 import client.model.tileentity.TileEntityFoodCraftTable;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -23,7 +23,7 @@ public class BlockFoodCraftTable extends Block
     public BlockFoodCraftTable()
     {
     	super(Material.iron);
-    	this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+    	this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
     }
 
     @SideOnly(Side.CLIENT)
@@ -48,7 +48,7 @@ public class BlockFoodCraftTable extends Block
         }
         else
         {
-            entityplayer.openGui(FeliModServerMod.Instance, 1, world, x, y, z);
+            entityplayer.openGui(ILHsJapaneseFood.Instance, 1, world, x, y, z);
             return true;
         }
     }

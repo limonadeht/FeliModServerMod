@@ -2,7 +2,7 @@ package common.item;
 
 import java.util.List;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import common.entity.EntityStarCannonBullet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +38,7 @@ public class ItemStarCannon extends Item
 
         this.maxStackSize = 1;
         this.setMaxDamage(this.maxdamage);
-        this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+        this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class ItemStarCannon extends Item
     			}
 
     			par1ItemStack.damageItem(1, par3EntityPlayer); //耐久値消費
-    			par2World.playSoundAtEntity(par3EntityPlayer, FeliModServerMod.MOD_ID  + ":" + this.gunsound, 0.7F, 0.7F); //発射音
+    			par2World.playSoundAtEntity(par3EntityPlayer, ILHsJapaneseFood.MOD_ID  + ":" + this.gunsound, 0.7F, 0.7F); //発射音
 
     			if (!par2World.isRemote)
     			{

@@ -3,7 +3,8 @@ package common.block;
 import java.util.Random;
 
 import client.model.tileentity.TileEntityRiceCooker;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
+import common.Register;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -69,7 +70,7 @@ public class BlockRiceCooker extends BlockContainer
 
 
 	  public Item getItemDropped(World world, int x, int y, int z){
-		  return Item.getItemFromBlock(FeliModServerModBlocks.BlockRiceCookerIdle);
+		  return Item.getItemFromBlock(Register.BlockRiceCookerIdle);
 
 	  }
 
@@ -123,7 +124,7 @@ public class BlockRiceCooker extends BlockContainer
 
         	if (itemstack == null)
         	{
-        		player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
+        		player.openGui(ILHsJapaneseFood.Instance, 0, world, x, y, z);
 
         		return true;
         	}
@@ -185,12 +186,12 @@ public class BlockRiceCooker extends BlockContainer
         	        		world.markBlockForUpdate(x, y, z);
         	        		world.playSoundAtEntity(player, "random.pop", 0.4F, 1.8F);
         				}
-        				player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
+        				player.openGui(ILHsJapaneseFood.Instance, 0, world, x, y, z);
         				return true;
         			}
         			else
         			{
-        				player.openGui(FeliModServerMod.Instance, 0, world, x, y, z);
+        				player.openGui(ILHsJapaneseFood.Instance, 0, world, x, y, z);
         				return true;
         			}
         		}
@@ -235,9 +236,9 @@ public class BlockRiceCooker extends BlockContainer
 		keepInventory = true;
 
 		if(active){
-			worldObj.setBlock(xCoord, yCoord, zCoord, FeliModServerModBlocks.BlockRiceCookerActive);
+			worldObj.setBlock(xCoord, yCoord, zCoord, Register.BlockRiceCookerActive);
 		}else{
-			worldObj.setBlock(xCoord, yCoord, zCoord, FeliModServerModBlocks.BlockRiceCookerIdle);
+			worldObj.setBlock(xCoord, yCoord, zCoord, Register.BlockRiceCookerIdle);
 		}
 
 		keepInventory = false;

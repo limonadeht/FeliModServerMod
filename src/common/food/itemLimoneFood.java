@@ -3,7 +3,7 @@ package common.food;
 import java.util.List;
 
 import cofh.api.energy.IEnergyContainerItem;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -30,7 +30,7 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
 
 	public itemLimoneFood(float par1, float par2, boolean par3)
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setMaxDamage(15);
 		this.setUnlocalizedName("felimodserver:limone_food");
 		this.saturationModifier = par2;
@@ -43,7 +43,7 @@ public class itemLimoneFood extends Item implements IEnergyContainerItem
     @SideOnly(Side.CLIENT)
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
-		if (FeliModServerMod.serverproxy.isShiftKeyDown()) {
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown()) {
 			list.add("This is Food using Energy");
 	        list.add("Pleace Energy Charged.");
 	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);

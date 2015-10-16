@@ -38,7 +38,7 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
 		  この座標がずれると、レシピ表示画面に表示されるアイコンがズレるので気をつけましょう。*/
 		public recipeCacher(ItemStack in, ItemStack out) {
 			in.stackSize = 1;
-			this.input = new PositionedStack(in, 48, 21);
+			this.input = new PositionedStack(in, 93, 23);
 			this.result= new PositionedStack(out, 102, 21);
 		}
 
@@ -77,7 +77,7 @@ public class CatchRecipeHandler extends TemplateRecipeHandler{
 	//ここで登録をした範囲内をGUIでクリックすると文字列のレシピ画面を表示します.
 	@Override
 	public void loadTransferRects() {
-	    transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(65, 25, 20, 20), "RiceCookerRecipe"));
+	    transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(77, 3, 10, 10), "RiceCookerRecipe"));
 	}
 
 	/*以下のメソッドは、NEIのGUI画面上でアイコンをクリックしたり、

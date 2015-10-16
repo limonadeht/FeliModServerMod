@@ -8,12 +8,15 @@ tile.Food CraftTable.name=Food CraftTable
 tile.Bento.name=Bentou
 
 tile.Rice.name=CropRice
+tile.Sushi_1.name=Sushi_1
 
 //ITEM
 item.bento_sample.name=SampleItem
 item.Yakinikudonburi.name=Yakiniku Donburi
 item.felimodserver:sabakan_food.name=Sabakan
 item.felimodserver:limone_food.name=Limone Food
+
+item.sample:spawn_egg.name=LOL Spawn Lychever
 
 item.felimodserver:fooder_pickaxe.name=§bFooder's Tool §f[§6Pickaxe§f]
 item.felimodserver:fooder_shovel.name=§bFooder's Tool §f[§6Shovel§f]
@@ -27,9 +30,12 @@ item.fooder_armor_boots.name=§bFooder's Armor §f[§6Boots§f]
 
 item.enderCannon.name=Ender Cannon
 item.felimodserver:itemdebug.name=DebuggerItem
+item.bucketLimone.name=Limone Bucket
 
 item.felimodserver:itemRiceSeed.name=Rice Seed
 
 item.null.name=null
+
+entity.ILH's JapaneseFood.Lychever.name=Lychever
 
 //OTHER

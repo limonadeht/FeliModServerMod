@@ -2,7 +2,7 @@ package common.item;
 
 import java.util.List;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ public class itemDebug extends Item
 {
 	public itemDebug()
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setUnlocalizedName("felimodserver:itemdebug");
 		this.setTextureName("felimodserver:debug_item");
 	}
@@ -47,7 +47,7 @@ public class itemDebug extends Item
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced)
 	{
-		if (FeliModServerMod.serverproxy.isShiftKeyDown())
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown())
 		{
 		list.add("Debugger Item.");
 		list.add("Right-Click flyMode");

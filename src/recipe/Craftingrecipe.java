@@ -1,31 +1,31 @@
 package recipe;
 
-import common.item.FeliModServerModItems;
+import common.Register;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class Craftingrecipe{
 	public static void registerFeliModServerModCraftingRecipes(){
-        GameRegistry.addRecipe(new ItemStack(FeliModServerModItems.itemSaba),
+        GameRegistry.addRecipe(new ItemStack(Register.itemSaba),
                 "c",
                 "f",
                 "c",
                 'f', Items.fish,
                 'c', Items.coal
         );
-        GameRegistry.addRecipe(new ItemStack(FeliModServerModItems.itemSabakanFood),
+        GameRegistry.addRecipe(new ItemStack(Register.itemSabakanFood),
                 "iii",
                 "isi",
                 "iii",
-                's', FeliModServerModItems.itemSaba,
+                's', Register.itemSaba,
                 'i', Items.iron_ingot
         );
-        GameRegistry.addRecipe(new ItemStack(FeliModServerModItems.itemEnderCannon),
+        GameRegistry.addRecipe(new ItemStack(Register.itemEnderCannon),
                 "c",
                 "f",
                 "c",
-                'f', FeliModServerModItems.ItemFoodCrystal,
+                'f', Register.ItemFoodCrystal,
                 'c', Items.ender_pearl
         );
    }

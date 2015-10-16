@@ -1,7 +1,7 @@
 package common.block;
 
 import client.model.tileentity.TileEntityTv;
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,7 +19,7 @@ public class BlockTv extends BlockContainer
 		super(material);
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 	}
 
 	public int getRenderType()

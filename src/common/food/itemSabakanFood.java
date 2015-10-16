@@ -2,7 +2,7 @@ package common.food;
 
 import java.util.List;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -31,7 +31,7 @@ public class itemSabakanFood extends Item
 
 	public itemSabakanFood(float par1, float par2, boolean par3)
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setMaxDamage(3);
 		this.setUnlocalizedName("felimodserver:sabakan_food");
 		this.saturationModifier = par2;
@@ -46,7 +46,7 @@ public class itemSabakanFood extends Item
 	//ToolTipの設定。EnumChatFormattingでカラーコードが指定可能
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced)
 	{
-		if (FeliModServerMod.serverproxy.isShiftKeyDown())
+		if (ILHsJapaneseFood.serverproxy.isShiftKeyDown())
 		{
 	        list.add(EnumChatFormatting.GOLD + "Hunger: " + healAmount);
 	        list.add(EnumChatFormatting.DARK_AQUA + "mogumogu: " + itemUseDuration);

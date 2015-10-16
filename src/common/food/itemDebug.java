@@ -2,7 +2,7 @@ package common.food;
 
 import java.util.List;
 
-import common.FeliModServerMod;
+import common.ILHsJapaneseFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ public class itemDebug extends Item
 {
 	public itemDebug()
 	{
-		this.setCreativeTab(FeliModServerMod.tabFeliModServerMod);
+		this.setCreativeTab(ILHsJapaneseFood.tabFeliModServerMod);
 		this.setUnlocalizedName("felimodserver:itemdebug");
 	}
 
